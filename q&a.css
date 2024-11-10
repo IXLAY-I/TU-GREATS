@@ -3,6 +3,7 @@
     margin-left: 0;
     margin-right: 0;
     box-sizing: border-box;
+    font-family: 'preconnect';
 }
 
 .Header{
@@ -112,7 +113,9 @@
 }
 .faq-container {
     width: 80%;
-    margin: auto;
+    margin: 20px auto;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
 }
 
 .faq-list {
@@ -122,10 +125,15 @@
 
 .faq-list li {
     border: 1px solid #ddd;
-    margin: 5px 0;
-    border-radius: 5px;
+    border-radius: 8px;
+    margin: 8px 0;
     overflow: hidden;
-    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.faq-list li:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .faq-list input[type="checkbox"] {
@@ -137,24 +145,39 @@
     justify-content: space-between;
     align-items: center;
     font-weight: bold;
-    padding: 15px;
+    padding: 15px 20px;
+    background: #f7f9fc;
     cursor: pointer;
-    background: #f5f5f5;
-    transition: background 0.3s;
+    transition: background 0.3s, color 0.3s;
 }
 
 .faq-list label:hover {
-    background: #e0e0e0;
+    background: #e3e8f1;
+    color: #ffa600;
+}
+
+.faq-list label i {
+    transition: transform 0.3s;
+}
+
+.faq-list input[type="checkbox"]:checked + label i {
+    transform: rotate(180deg);
 }
 
 .faq-list .content {
-    padding: 15px;
-    display: none;
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
     color: #333;
+    background: #fdfdfd;
+    border-top: 1px solid #eee;
+    transition: max-height 0.2s ease, padding 0.2s ease;
 }
 
 .faq-list input[type="checkbox"]:checked + label + .content {
-    display: block;
+    padding: 15px 20px;
+    max-height: 300px; 
+    transition: max-height 0.2s ease, padding 0.2s ease;
 }
 a {
     text-decoration: none; /
