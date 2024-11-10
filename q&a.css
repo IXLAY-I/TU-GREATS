@@ -1,0 +1,166 @@
+* {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+.Header{
+    background-color: rgb(206, 206, 206);
+    color: red;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    padding-left: 1%;
+}
+
+.AboutHeaderLeft {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    gap: 2%;
+}
+
+.AboutHeaderRight {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.TextHeader {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 80px;
+    font-weight: 900;
+    font-family: "Iceberg", sans-serif;
+}
+
+.topic {
+    display: flex;
+    height: 20%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.topic div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(206, 206, 206);
+    width: 10%;
+    height: 30%;
+    border-radius: 16px;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: "Jura", sans-serif;
+}
+
+.topic p {
+    font-family: "Noto Sans Thai", sans-serif;  
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.result {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 5%;
+}
+
+.result ul {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+}
+
+.result li {
+    display: flex;
+    align-items: center;
+    font-size: x-large;
+    font-family: "Noto Sans Thai", sans-serif;
+    justify-content: space-between;
+    height: 10%;
+    width: 95%;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: rgb(251, 251, 251);
+    list-style-type: none;
+    box-shadow: 0 5px 5px gray;
+}
+
+.Box-Question {
+    height: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.Box-Question button {
+    font-size: larger;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 5px 5px gray;
+}
+
+.Box-Question button:hover {
+    background-color: rgb(202, 202, 202);
+}
+.faq-container {
+    width: 80%;
+    margin: auto;
+}
+
+.faq-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.faq-list li {
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.faq-list input[type="checkbox"] {
+    display: none;
+}
+
+.faq-list label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    padding: 15px;
+    cursor: pointer;
+    background: #f5f5f5;
+    transition: background 0.3s;
+}
+
+.faq-list label:hover {
+    background: #e0e0e0;
+}
+
+.faq-list .content {
+    padding: 15px;
+    display: none;
+    color: #333;
+}
+
+.faq-list input[type="checkbox"]:checked + label + .content {
+    display: block;
+}
+a {
+    text-decoration: none; /
+}
+
+a img {
+    width: 13%; 
+    height: auto; 
+}
