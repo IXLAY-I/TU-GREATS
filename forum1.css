@@ -1,0 +1,322 @@
+* {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+.Header{
+    background-color: rgb(206, 206, 206);
+    height: 10%;
+    display: flex;
+    align-items: center;
+    padding-left: 1%;
+    width: 100%;
+}
+
+.AboutHeaderLeft {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    gap: 2%;
+}
+
+.AboutHeaderRight {
+    height: 100%;
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+.AboutHeaderMid {
+    height: 100%;
+    width: 50%;
+    display: flex;
+}
+
+.Banner {
+    background-image: url(/image/Banner.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BoxSearch {
+    width: 40vw;
+    background-color: white;
+    height: 10%;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.BoxSearch i {
+    font-size: 1.5vw;
+    color: gray;
+}
+
+.BoxSearch input {
+    border: none;
+    width: 35vw;
+    font-size: 1.5vw;
+    outline: none;
+    background: transparent;
+}
+
+.BoxForumMain {
+    display: flex;
+    width: 100vw;
+    height: 50vw;
+    padding: 5vw;
+}
+
+.ForumMain {
+    width: 100%;
+    height: 100%;
+}
+
+.TextBox {
+    width: 90%;
+    height: auto;
+    margin: auto;
+}
+
+.PicBox {
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+.leftForum {
+    width: 80vw;
+    background-color: rgb(230, 230, 230);
+}
+
+.ForumUser {
+    height: 10%;
+    width: 25%;
+    display: flex; 
+}
+
+.ForumUser .Right {
+    height: 100%;
+    display: flex; 
+    flex: 1;
+    flex-direction: column;
+}
+
+.top-box {
+    display: flex;
+    height: 50%;
+}
+.top-box .left, .top-box .right {
+    flex: 1;
+}
+.top-box .right {
+    border-right: none; /* Remove the border from the right section */
+}
+
+.bottom-box {
+    height: 50%;
+}
+
+.ForumUser .left {
+    height: 100%;
+    width: 25%;
+    display: flex; 
+}
+
+.section-room {
+    width: 100%;
+    font-size: 1.5vw;
+    text-align: center;
+    border-collapse: collapse;
+}
+  
+.section-room th, .section-room td {
+    padding: 20px 25px;
+}
+
+.RightForum {
+    width: 20vw;
+}
+
+.Category {
+    height: 50%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.BoxCategory {
+    height: 15vw;
+    background-color: rgb(230, 230, 230);
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.BoxCategory h1 {
+    background-color: rgb(206, 206, 206);
+}
+
+.BoxCategory button {
+    height: 2vw;
+    text-align: left;
+    border: none;
+    background: transparent;
+    font-size: 1vw;
+    
+}
+
+.BoxCategory button.active {
+    background-color: rgb(255, 172, 9);
+}
+
+.new-post-form {
+    width: 80vw;
+    padding: 5vw;
+}
+.input-field {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.submit-button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 95%;
+}
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.Reply-box {
+    width: 80vw;
+    height: auto;
+    background-color: #666;
+    margin-left: 5vw;
+    display: flex;
+}
+
+.Reply {
+    height: auto;
+}
+
+
+
+.AskQuestion {
+    height: 50%;
+    display: grid;
+    justify-content: center;
+}
+
+.AskQuestion button {
+    background-color: rgb(255, 172, 9);
+    font-size: 1vw;
+    width: 10vw;
+    height: 2vw;
+    border: none;
+    border-radius: 100px;
+}
+
+.AskQuestion button:hover {
+    background-color: rgb(209, 143, 11);
+}
+
+.container {
+    position: fixed;
+    top: 20vw;
+    left: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.signup-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1vw;
+    width: 40vw;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.signup-box::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: #f4d03f;
+    border-radius: 0 0 10px 10px;
+    z-index: -1;
+}
+
+.signup-box h2 {
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+    color: #333;
+}
+
+.signup-box p {
+    font-size: 1vw;
+    margin-bottom: 1vw;
+    color: #999;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 12px 40px 12px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1vw;
+    color: #666;
+    outline: none;
+}
+
+.input-container .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #999;
+}
+
+.CloseQuestion {
+    font-size: 1vw;
+    width: 5vw;
+    height: 2vw;
+    border-radius: 12px;
+    border: none;
+    background-color: #f4d03f;
+}
+
+.CloseQuestion:hover {
+    background-color: #c7a932;
+}
+
+.hideQuestionBox {
+    display: none;
+}

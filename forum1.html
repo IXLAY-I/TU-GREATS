@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum1</title>
+    <link rel="stylesheet" href="/css/forum1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="Header">
+        <div class="AboutHeaderLeft">
+            <img src="/image/Logo_TU.png" alt="Logo">
+        </div>
+        <div class="AboutHeaderMid">
+
+        </div>
+        <div class="AboutHeaderRight">
+            <div></div>
+            <img id="dropdownmenu" src="/image/dropdownmenu.png" alt="">
+        </div>
+    </div>
+    <div class="BoxForumMain">
+        <div class="leftForum">
+            <div class="Forum">
+                <div class="ForumUser">
+                    <div class="Left">
+                        <img src="/image/icon1.png" alt="">
+                    </div>
+                    <div class="Right">
+                        <div class="top-box">
+                            <div class="left">
+                                <p>username</p>
+                            </div>
+                            <div class="right">
+                                <p>posttime</p>
+                            </div>
+                        </div>
+                        <div class="bottom-box">
+                            <p>Faculty</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ForumMain">
+                    <div class="TextBox">
+                        <h1>Forum Title</h1>
+                        <p style="font-size: larger;">Forum Detail</p>
+                    </div>
+                    <div class="PicBox">
+                        <img src="/image/forum.png" alt="" style="width: 50%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="RightForum">
+            <div class="Category">
+                <div class="BoxCategory">
+                    <h1>Forums Filter</h1>
+                    <button class="active" data-name="all"><i class="fa-solid fa-eye"></i>  View All</button>
+                    <button data-name="Popular"><i class="fa-solid fa-heart"></i>  Most Popular</button>
+                    <button data-name="Reply"><i class="fa-solid fa-comment-dots"></i>  Most Reply</button>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="new-post-form">
+            <form>
+                <textarea class="input-field" placeholder="Post Your Reply" rows="5" required></textarea><br>
+                <button type="submit" class="submit-button">Post</button>
+            </form>
+    </div>
+    <div class="Reply-Box">
+        <div class="Reply">
+            <div class="leftForum">
+                <div class="Forum">
+                    <div class="ForumUser" style="gap: 10px;">
+                        <div class="Left">
+                            <img src="/image/icon1.png" alt="">
+                        </div>
+                        <div class="Right">
+                            <div class="top-box">
+                                <div class="left">
+                                    username
+                                </div>
+                                <div class="right">
+                                    posttime
+                                </div>
+                            </div>
+                            <div class="bottom-box">
+                                Faculty
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ForumMain">
+                        <div class="TextBox">
+                            <p style="font-size: larger;">Forum Detail</p>
+                        </div>
+                        <div class="PicBox">
+                            <img src="/image/forum.png" alt="" style="width: 50%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
