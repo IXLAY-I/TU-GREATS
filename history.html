@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link rel="stylesheet" href="/css/history.css">
+</head>
+<body>
+    <div class="Heading">
+        <div class="topic">
+            <img src="/image/LogoTCTC.png" alt="">
+            <div>ผลการสอบวัดประเมินคุณลักษณะการเป็นผู้นำ (GREATS Exam)</div>
+            <div>-------------------------------------------------------------------------------------------------------------------</div>
+        </div>
+    </div>
+    <table class="TableHistory" id="historyT">
+        <tr>
+          <th>เลขนักศึกษา</th>
+          <th>ชื่อ-สกุล</th>
+          <th>รอบ</th>
+          <th>วันหมดอายุ</th>
+          <th>เช็คคะแนน</th>
+        </tr>
+        <tr id="historyT1">
+          <td>6610742303</td>
+          <td>ธนวัฒน์ ภาคาพรต</td>
+          <td>3/2566_RS_PT1 (กรกฎาคม 2566)</td>
+          <td>30 กรกฎาคม 2568</td>
+          <td><a href="/score.html" onclick="takedata(this)">>คลิกเพื่อดูคะแนน</a></td>
+        </tr>
+        <tr id="historyT2">
+          <td>6610742303</td>
+          <td>ธนวัฒน์ ภาคาพรต</td>
+          <td>3/2566_RS_PT1 (กรกฎาคม 2566)</td>
+          <td>30 กรกฎาคม 2568</td>
+          <td><a href="/score.html" onclick="takedata(this)"></a>>คลิกเพื่อดูคะแนน</a></td>
+        </tr>
+      </table>
+
+    <script src="/app/slide.js"></script>
+    <script src="/app/popup.js"></script>
+    <script src="/app/script.js"></script>
+    <script src="/app/countdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script>
+       function takedata(r) {
+         let row = r.closest('tr');
+        localStorage.setItem('round', row.cells[2].innerText);
+        localStorage.setItem('expire', row.cells[3].innerText);
+       }
+    </script>
+</body>
+</html>

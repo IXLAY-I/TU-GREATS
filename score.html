@@ -15,10 +15,10 @@
         </div>
         <div class="StudentData">
             <div class="StudentID">
-                <div>เลขทะเบียนนักศึกษา: </div>
-                <div>รอบ:</div>
-                <div>ชื่อ-นามสกุล:</div>
-                <div>หมดอายุ:</div>
+                <div id="studentID">เลขทะเบียนนักศึกษา: </div>
+                <div id="round">รอบ:</div>
+                <div id="name">ชื่อ-นามสกุล: </div>
+                <div id="expire">หมดอายุ: </div>
             </div>
         </div>
     </div>
@@ -100,5 +100,15 @@
     <div class="Download">
         <button>Download PDF</button>
     </div>
+
+    <script src="/app/slide.js"></script>
+    <script src="/app/popup.js"></script>
+    <script src="/app/script.js"></script>
+    <script src="/app/countdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script> 
+       score()
+    </script>
+
 </body>
 </html>
