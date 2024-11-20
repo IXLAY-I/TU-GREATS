@@ -3,7 +3,6 @@
     margin-left: 0;
     margin-right: 0;
     box-sizing: border-box;
-    font-family: 'preconnect';
 }
 
 .Header{
@@ -110,80 +109,4 @@
 
 .Box-Question button:hover {
     background-color: rgb(202, 202, 202);
-}
-.faq-container {
-    width: 80%;
-    margin: 20px auto;
-    max-width: 800px;
-    font-family: Arial, sans-serif;
-}
-
-.faq-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.faq-list li {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin: 8px 0;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
-}
-
-.faq-list li:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.faq-list input[type="checkbox"] {
-    display: none;
-}
-
-.faq-list label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: bold;
-    padding: 15px 20px;
-    background: #f7f9fc;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-}
-
-.faq-list label:hover {
-    background: #e3e8f1;
-    color: #ffa600;
-}
-
-.faq-list label i {
-    transition: transform 0.3s;
-}
-
-.faq-list input[type="checkbox"]:checked + label i {
-    transform: rotate(180deg);
-}
-
-.faq-list .content {
-    padding: 0 20px;
-    max-height: 0;
-    overflow: hidden;
-    color: #333;
-    background: #fdfdfd;
-    border-top: 1px solid #eee;
-    transition: max-height 0.2s ease, padding 0.2s ease;
-}
-
-.faq-list input[type="checkbox"]:checked + label + .content {
-    padding: 15px 20px;
-    max-height: 300px; 
-    transition: max-height 0.2s ease, padding 0.2s ease;
-}
-a {
-    text-decoration: none; /
-}
-
-a img {
-    width: 13%; 
-    height: auto; 
 }
