@@ -44,6 +44,7 @@ function login() {
     .then(response => {
         if (response.data.message === 'Successful') {
             localStorage.setItem("id", document.getElementById('ID').value)
+            localStorage.setItem("name", response.data.data);
             alert("Login successfully")
             window.location.href = 'main.html';
         } else {
@@ -114,9 +115,27 @@ function score() {
   document.getElementById("round").innerHTML += localStorage.getItem("round");
   document.getElementById("name").innerHTML += localStorage.getItem("name");
   document.getElementById("expire").innerHTML += localStorage.getItem("expire");
-  localStorage.removeItem("round");
-  localStorage.removeItem("expire");
+
 }
+
+function QA() {
+  axios.post('http://127.0.0.1:3000/users/show_question', data)
+  .then(response => {
+    if (response.data.message === 'Successful') {
+      const data = response.data.data
+      const ques = data || [];
+
+      ques.forEach((q, index) => {
+        const qaid = "q"+(index+1);
+        const question = document.getElementById(qaid);
+        
+        document.getElementById(qaid+"a").innerHTML = "Q"+(index+1)+" : "+q.Question;
+        document.getElementById(qaid+"c").innerHTML = q.Answer;
+      });
+    }
+  })
+}
+
 
 function logout() {
 
