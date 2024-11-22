@@ -14,144 +14,82 @@
             <div>-------------------------------------------------------------------------------------------------------------------</div>
         </div>
         <div class="StudentData">
-            <div class="StudentData1">
-                <p>เลขทะเบียนนักศึกษา:</p>
-                <p>ชื่อ - นามสกุล: </p>
-            </div>
-            <div class="StudentData2">
-                <p>รอบ: </p>
-                <p>หมดอายุ: </p>
+            <div class="StudentID">
+                <div id="studentID">เลขทะเบียนนักศึกษา: </div>
+                <div id="round">รอบ:</div>
+                <div id="name">ชื่อ-นามสกุล: </div>
+                <div id="expire">หมดอายุ: </div>
             </div>
         </div>
     </div>
-    <div class="GradingChart">
-        <div class="SmallGradingChart">
-            <div class="Subject">
-                <div style="font-size: 1.5vw; background-color: rgb(255, 122, 0); color: white;">Name</div>
-                <div>Global Mindset (TU101)</div>
-                <div>Responsibility (TU103)</div>
-                <div>Eloquence (TU106)</div>
-                <div>Aesthetic Appreciation (TU102)</div>
-                <div>Team Leader</div>
-                <div>Spirit of Thammasat (TU100)</div>
+    <div class="table-container">
+        <div class="table-container">
+            <div class="header-row">
+                <div class="header-cell">Name</div>
+                <div class="header-cell">Score</div>
+                <div class="header-cell">Exempt</div>
             </div>
-            <div class="Score">
-                <div class="score-title">Score</div>
-                <div class="line">
-                    <div class="BoxTU">
-                        <div>H</div>
-                        <div>1</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>Z</div>
-                        <div>1</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>Y</div>
-                        <div>1</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>C</div>
-                        <div>1</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>T</div>
-                        <div>1</div>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="BoxTU">
-                        <div>I</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>S</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>O</div>
-                        <div>3</div>
-                    </div>
-                    <div style="background: none;"></div>
-                    <div style="background: none;"></div>
-                </div>
-                <div class="line">
-                    <div class="BoxTU">
-                        <div>R</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>B</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>W</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>E</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>F</div>
-                        <div>3</div>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="BoxTU">
-                        <div>U</div>
-                        <div>2</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>A</div>
-                        <div>2</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>P</div>
-                        <div>2</div>
-                    </div>
-                    <div style="background: none;"></div>
-                    <div style="background: none;"></div>
-                </div>
-                <div class="line">
-                    <div class="BoxTU">
-                        <div>L</div>
-                        <div>1</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>M</div>
-                        <div>2</div>
-                    </div>
-                    <div style="background: none;"></div>
-                    <div style="background: none;"></div>
-                    <div style="background: none;"></div>
-                </div>
-                <div class="line">
-                    <div class="BoxTU">
-                        <div>D</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>V</div>
-                        <div>3</div>
-                    </div>
-                    <div class="BoxTU">
-                        <div>G</div>
-                        <div>3</div>
-                    </div>
-                    <div style="background: none;"></div>
-                    <div style="background: none;"></div>
-                </div>
+        <div class="subject-row">
+            <div class="subject-name">Global Mindset (TU101)</div>
+            <div class="score-boxes">
+                <div id="H" class="score-box" data-score="1">H<br>0</div>
+                <div id="Z" class="score-box" data-score="1">Z<br>0</div>
+                <div id="Y" class="score-box" data-score="1">Y<br>0</div>
+                <div id="C" class="score-box" data-score="1">C<br>0</div>
+                <div id="T" class="score-box" data-score="1">T<br>0</div>
             </div>
-            <div class="Exempt">
-                <div style="background-color: rgb(255, 122, 0); color: white;">Exempt</div>
-                <div>-</div>
-                <div>TU103</div>
-                <div>TU106</div>
-                <div>-</div>
-                <div>-</div>
-                <div>TU100</div>
+            <div id="TU101" class="subject-code" >TU101</div>
+        </div>
+    
+        <div class="subject-row">
+            <div class="subject-name">Responsibility (TU103)</div>
+            <div class="score-boxes">
+                <div id="I" class="score-box" data-score="1">I<br>0</div>
+                <div id="S" class="score-box" data-score="1">S<br>0</div>
+                <div id="O" class="score-box" data-score="1">O<br>0</div>
             </div>
+            <div id="TU103" class="subject-code">TU103</div>
+        </div>
+    
+        <div class="subject-row">
+            <div class="subject-name">Eloquence (TU106)</div>
+            <div class="score-boxes">
+                <div id="R" class="score-box" data-score="1">R<br>0</div>
+                <div id="B" class="score-box" data-score="1">B<br>0</div>
+                <div id="W" class="score-box" data-score="1">W<br>0</div>
+                <div id="E" class="score-box" data-score="1">E<br>0</div>
+                <div id="F" class="score-box" data-score="1">F<br>0</div>
+            </div>
+            <div id="TU106" class="subject-code">TU106</div>
+        </div>
+        <div class="subject-row">
+            <div class="subject-name">Team Leader </div>
+            <div class="score-boxes">
+                <div id="L" class="score-box" data-score="1">L<br>0</div>
+                <div id="M" class="score-box" data-score="1">M<br>0</div>
+            </div>
+
+        </div>
+    
+
+        <div class="subject-row">
+            <div class="subject-name">Aesthetic Appreciation (TU102)</div>
+            <div class="score-boxes">
+                <div id="U" class="score-box" data-score="1">U<br>0</div>
+                <div id="A" class="score-box" data-score="1">A<br>0</div>
+                <div id="P" class="score-box" data-score="1">P<br>0</div>
+            </div>
+            <div id="TU102" class="subject-code">TU102</div>
+        </div>
+
+         <div class="subject-row">
+            <div class="subject-name">Spirit of Thammasat (TU100)</div>
+            <div class="score-boxes">
+                <div id="D" class="score-box" data-score="1">D<br>0</div>
+                <div id="V" class="score-box" data-score="1">V<br>0</div>
+                <div id="G" class="score-box" data-score="1">G<br>0</div>
+            </div>
+            <div id="TU100" class="subject-code">TU100</div>
         </div>
     </div>
     <div class="Text">
@@ -162,5 +100,16 @@
     <div class="Download">
         <button>Download PDF</button>
     </div>
+
+    <script src="/app/slide.js"></script>
+    <script src="/app/popup.js"></script>
+    <script src="/app/script.js"></script>
+    <script src="/app/countdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script> 
+       score()
+       showscore()
+    </script>
+
 </body>
 </html>
