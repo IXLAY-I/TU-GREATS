@@ -1,3 +1,4 @@
+
  
 // function changePassword() {
 //   const name = document.getElementById('name').value;
@@ -110,6 +111,97 @@ function login() {
   }
 }
 
+function history() {
+  const data = {
+    ID: localStorage.getItem('id')
+  };
+
+  axios.post('http://127.0.0.1:3000/users/history', data)
+    .then(response => {
+      if (response.data.message === 'Successful') {
+        const iddata = response.data;
+        const ID = iddata || [];
+
+        // Check if the table exists; if not, create it
+        let table = document.getElementById("historyT");
+        if (!table) {
+          table = document.createElement("table");
+          table.id = "historyT";
+          table.style.width = "80%";
+          table.style.margin = "20px auto";
+          table.style.borderCollapse = "collapse";
+
+          // Add the table to the DOM (e.g., inside a container)
+          document.body.appendChild(table);
+        }
+
+        // Clear the table's existing rows
+        table.innerHTML = "";
+
+        // Create the table header
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        const headers = ["เลขนักศึกษา", "ชื่อ-สกุล", "รอบ", "วันหมดอายุ", "เช็คคะแนน"];
+        headers.forEach(headerText => {
+          const th = document.createElement("th");
+          th.textContent = headerText;
+          th.style.border = "1px solid black";
+          th.style.padding = "8px";
+          th.style.textAlign = "center";
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Create the table body
+        const tbody = document.createElement("tbody");
+        table.appendChild(tbody);
+
+        // Populate the table with data rows
+        ID.round.forEach((room, index) => {
+          const row = document.createElement("tr");
+          row.id = "historyT" + index;
+
+          const idCell = document.createElement("td");
+          const nameCell = document.createElement("td");
+          const roundCell = document.createElement("td");
+          const statusCell = document.createElement("td");
+          const connectCell = document.createElement("td");
+
+          idCell.textContent = localStorage.getItem('id');
+          nameCell.textContent = localStorage.getItem('name');
+          roundCell.textContent = room.round;
+          statusCell.textContent = ID.date[index]?.date || "N/A";
+
+          // Create the link for the action
+          const link = document.createElement("a");
+          link.href = "/score.html";
+          link.textContent = "คลิกเพื่อดูคะแนน";
+          link.onclick = function (event) {
+            takedata(this);
+            // event.preventDefault(); // Prevent default navigation
+          };
+          connectCell.appendChild(link);
+
+          // Append cells to the row
+          row.appendChild(idCell);
+          row.appendChild(nameCell);
+          row.appendChild(roundCell);
+          row.appendChild(statusCell);
+          row.appendChild(connectCell);
+
+          // Append the row to the tbody
+          tbody.appendChild(row);
+        });
+      } else {
+        console.error("Failed to fetch history:", response.data.message);
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching history:", error);
+    });
+}
+
 function score() {
   document.getElementById("studentID").innerHTML += localStorage.getItem("id");
   document.getElementById("round").innerHTML += localStorage.getItem("round");
@@ -118,22 +210,174 @@ function score() {
 
 }
 
-function QA() {
-  axios.post('http://127.0.0.1:3000/users/show_question', data)
+function showscore() {
+  const data = {
+    ID: localStorage.getItem('id')
+  }
+
+  axios.post('http://127.0.0.1:3000/users/show_score', data)
   .then(response => {
     if (response.data.message === 'Successful') {
-      const data = response.data.data
-      const ques = data || [];
+      console.log(response.data)
+      const teamleader = response.data.teamleader || []
+      const tu100 = response.data.tu100 || []
+      const tu101 = response.data.tu101 || []
+      const tu102 = response.data.tu102 || []
+      const tu103 = response.data.tu103 || []
+      const tu106 = response.data.tu106 || []
+
+      teamleader.forEach((C, i) => {
+
+        document.getElementById("L").innerHTML = document.getElementById("L").innerHTML.replace("0", C.L)
+        if (C.L == 3) {
+          document.getElementById("L").setAttribute('data-score', '3')
+        }
+        document.getElementById("M").innerHTML = document.getElementById("M").innerHTML.replace("0", C.M)
+        if (C.M == 3) {
+          document.getElementById("M").setAttribute('data-score', '3')
+        }
+
+      })
+
+      tu100.forEach((C, i) => {
+
+        document.getElementById("D").innerHTML = document.getElementById("D").innerHTML.replace("0", C.D)
+        if (C.D == 3) {
+          document.getElementById("D").setAttribute('data-score', '3')
+        }
+        document.getElementById("V").innerHTML = document.getElementById("V").innerHTML.replace("0", C.V)
+        if (C.Z == 3) {
+          document.getElementById("V").setAttribute('data-score', '3')
+        }
+        document.getElementById("G").innerHTML = document.getElementById("G").innerHTML.replace("0", C.G)
+        if (C.G == 3) {
+          document.getElementById("G").setAttribute('data-score', '3')
+        }
+        if (C.Exempt == "true") {
+          document.getElementById("TU100").classList.add('all-green')        }
+
+      })
+      
+      tu101.forEach((C, i) => {
+
+        document.getElementById("H").innerHTML = document.getElementById("H").innerHTML.replace("0", C.H)
+        if (C.H == 3) {
+          document.getElementById("H").setAttribute('data-score', '3')
+        }
+        document.getElementById("Z").innerHTML = document.getElementById("Z").innerHTML.replace("0", C.Z)
+        if (C.Z == 3) {
+          document.getElementById("Z").setAttribute('data-score', '3')
+        }
+        document.getElementById("Y").innerHTML = document.getElementById("Y").innerHTML.replace("0", C.Y)
+        if (C.Y == 3) {
+          document.getElementById("Y").setAttribute('data-score', '3')
+        }
+        document.getElementById("C").innerHTML = document.getElementById("C").innerHTML.replace("0", C.C)
+        if (C.C == 3) {
+          document.getElementById("C").setAttribute('data-score', '3')
+        }
+        document.getElementById("T").innerHTML = document.getElementById("T").innerHTML.replace("0", C.T)
+        if (C.T == 3) {
+          document.getElementById("T").setAttribute('data-score', '3')
+        }
+        if (C.Exempt == "true") {
+          document.getElementById("TU101").classList.add('all-green')        }
+      })
+
+      tu102.forEach((C, i) => {
+
+        document.getElementById("U").innerHTML = document.getElementById("U").innerHTML.replace("0", C.U)
+        if (C.U == 3) {
+          document.getElementById("U").setAttribute('data-score', '3')
+        }
+        document.getElementById("A").innerHTML = document.getElementById("A").innerHTML.replace("0", C.A)
+        if (C.A == 3) {
+          document.getElementById("A").setAttribute('data-score', '3')
+        }
+        document.getElementById("P").innerHTML = document.getElementById("P").innerHTML.replace("0", C.P)
+        if (C.P == 3) {
+          document.getElementById("P").setAttribute('data-score', '3')
+        }
+        if (C.Exempt == "true") {
+          document.getElementById("TU102").classList.add('all-green')        }
+      })
+
+      tu103.forEach((C, i) => {
+        document.getElementById("I").innerHTML = document.getElementById("I").innerHTML.replace("0", C.I)
+        if (C.I == 3) {
+          document.getElementById("I").setAttribute('data-score', '3')
+        }
+        document.getElementById("S").innerHTML = document.getElementById("S").innerHTML.replace("0", C.S)
+        if (C.S == 3) {
+          document.getElementById("S").setAttribute('data-score', '3')
+        }
+        document.getElementById("O").innerHTML = document.getElementById("O").innerHTML.replace("0", C.O)
+        if (C.O == 3) {
+          document.getElementById("O").setAttribute('data-score', '3')
+        }
+        if (C.Exempt == "true") {
+          document.getElementById("TU103").classList.add('all-green')
+        }
+      })
+
+      tu106.forEach((C, i) => {
+        document.getElementById("R").innerHTML = document.getElementById("R").innerHTML.replace("0", C.R)
+        if (C.R == 3) {
+          document.getElementById("R").setAttribute('data-score', '3')
+        }
+        document.getElementById("B").innerHTML = document.getElementById("B").innerHTML.replace("0", C.B)
+        if (C.B == 3) {
+          document.getElementById("B").setAttribute('data-score', '3')
+        }
+        document.getElementById("W").innerHTML = document.getElementById("W").innerHTML.replace("0", C.W)
+        if (C.W == 3) {
+          document.getElementById("W").setAttribute('data-score', '3')
+        }
+        document.getElementById("E").innerHTML = document.getElementById("E").innerHTML.replace("0", C.E)
+        if (C.E == 3) {
+          document.getElementById("E").setAttribute('data-score', '3')
+        }
+        document.getElementById("F").innerHTML = document.getElementById("F").innerHTML.replace("0", C.F)
+        if (C.F == 3) {
+          document.getElementById("F").setAttribute('data-score', '3')
+        }
+        if (C.Exempt == "true") {
+          document.getElementById("TU106").classList.add('all-green')
+        }
+      })
+
+    }
+  })
+}
+
+function QA() {
+  axios.post('http://127.0.0.1:3000/users/show_question')
+  .then(response => {
+    if (response.data.message === 'Successful') {
+      const dataqa = response.data.data
+      const ques = dataqa || [];
 
       ques.forEach((q, index) => {
         const qaid = "q"+(index+1);
         const question = document.getElementById(qaid);
-        
         document.getElementById(qaid+"a").innerHTML = "Q"+(index+1)+" : "+q.Question;
         document.getElementById(qaid+"c").innerHTML = q.Answer;
       });
     }
   })
+}
+
+function sendQA() {
+  const data = {
+    Text: document.getElementById("textqa").value
+  };
+  axios.post('http://127.0.0.1:3000/users/Question', data)
+  .then(response => {
+    if (response.data.message === 'Successful') {
+      location.reload();
+    }
+  })
+
 }
 
 
@@ -142,673 +386,3 @@ function logout() {
   localStorage.clear();
 
 }
-
-
-
-// const rooms = JSON.parse(localStorage.getItem('rooms')) || [];
-
-// function createRoom(){
-//   const room_name = document.getElementById('room_name');
-//   const roomtext = room_name.value.trim();
-//   const room_password = document.getElementById('room_password').value;
-
-//   const id = localStorage.getItem('id');
-//   if (roomtext === '') return ;
-
-//   const data = {
-//     room_name : roomtext,
-//     password : room_password,
-//     user_id : id
-//   }
-
-//   axios.post('http://127.0.0.1:3000/users/create_room', data)
-//     .then(response => {
-//       if (response.data.message === 'Successful') {
-//         alert('Create room successful')
-//         var user_data = {
-//           point: 0
-//         }
-//         var bot_data = {
-//           point: 0
-//         }
-//         localStorage.setItem(id, JSON.stringify(user_data));
-//         localStorage.setItem('0', JSON.stringify(bot_data));
-//         localStorage.setItem('room_id', response.data.room_id);
-//         localStorage.setItem('round', 0);
-//         window.location.href = 'room.html';
-//       } else {
-//         alert('fail')
-//       }
-//     });  
-// }
-
-// function showroom(){
-//   const id = localStorage.getItem('id');
-
-//   const data = {
-//     user_id : id
-//   }
-
-//   axios.post('http://127.0.0.1:3000/users/show_room', data)
-//   .then(response => {
-//     if (response.data.message === 'Successful') {
-//       const data = response.data.data
-//       const rooms = data || [];
-    
-//       var tableBody = document.querySelector("#myTable tbody");
-
-//       tableBody.innerHTML = '';
-//       rooms.forEach((room, index) => {
-//         var row = tableBody.insertRow();
-//         row.id = "tr"
-//         row.classList.add("background-room");
-//         var idCell = row.insertCell(0);
-//         var nameCell = row.insertCell(1);
-//         var player = row.insertCell(2);
-//         var status = row.insertCell(3);
-//         var connect = row.insertCell(4);
-//         idCell.innerHTML = room.room_id
-//         idCell.id = "roomID"
-//         idCell.setAttribute("name", room.room_id);
-//         nameCell.innerHTML = room.name
-//         player.innerHTML = room.people + '/5'
-        
-//         if (room.password == '') {
-//           console.log("Please enter");
-//           status.innerHTML = `<img src="/image/unlockstatus.png" alt="Status Image">`;
-//           connect.innerHTML = '<button type="button" class="join" onclick="checkpassword()">join</button>';
-//           localStorage.setItem('roomid_${index + 1}', room.room_id);
-//         } else {
-//           console.log("Please");
-//           status.innerHTML = `<img src="/image/lockstatus.png" alt="Status Image">`;
-//           connect.innerHTML = `<button type="button" id="joinButton_${index + 1}" class="join" onclick="show(joinButton_${index + 1})">join</button>`;
-          
-//         }
-        
-//       });
-//     } else {
-//     }
-//   });
-// }
-
-// function show(id) {
-//   const showPasswordInput = document.getElementById(id);
-//   const PasswordInputContainer = document.querySelector('.enter-password');
-//   const closePasswordInput = document.querySelector('.go-back');
-
-//   console.log(id)
-//   console.log(showPasswordInput)
-//   console.log(PasswordInputContainer)
-
-//   id.onclick = () => {
-//     PasswordInputContainer.classList.add('active');
-//   }
-  
-// closePasswordInput.onclick = () => {
-//     PasswordInputContainer.classList.remove('active');
-//   }
-// }
-
-// function checkpassword(id) {
-
-//   const user = localStorage.getItem('id');
-//   let password = document.getElementById('password').value;
-//   var table = document.getElementById("roomID");
-//   var id = table.getAttribute("name");  
-//   console.log(id)
-//   console.log(password)
-//   if (password.length <1) {
-//     password = "";
-//   } 
-//   console.log(password)
-//   const data = {
-//     user_id: user,
-//     room_id: id,
-//     password: password
-//   }
-//   console.log(data)
-
-//   axios.post('http://127.0.0.1:3000/users/join_room', data)
-//     .then(response => {
-//       if (response.data.message === 'Successful') {
-//         localStorage.setItem('room_id', id)
-//         var user_data = {
-//           point: 0
-//         }
-//         localStorage.setItem(user, JSON.stringify(user_data));
-//         window.location.href = 'room.html';
-//       } else {
-//         alert('Wrong Password')
-//       }
-//     }); 
-// };
-
-// function changeUsername() {
-//   const user = localStorage.getItem('id');
-//   const new_username = document.getElementById('new_username').value;
-
-//   const data = {
-//     user_id: user,
-//     new_username: new_username,
-//   };
-
-//   axios.post('http://127.0.0.1:3000/users/change_username', data)
-//       .then(response => {
-//           if (response.data.message === 'Successful') {
-//               alert("Change username successfully")
-//               window.location.href = 'lobby.html';
-//           } else {
-//               location.reload();
-//           }
-//       })
-//       .catch(error => {
-//           alert("Wrong, Try again")
-//           location.reload();
-//       });
-// }
-
-// function exitRoom() {
-//   const user = localStorage.getItem('id');
-//   const room_id = localStorage.getItem('room_id');
-
-//   const data = {
-//     user_id: user,
-//     room_id: room_id
-//   }
-
-//   axios.post('http://127.0.0.1:3000/users/exit', data)
-//     .then(response => {
-//       if (response.data.message === 'Successful') {
-//         localStorage.removeItem('room_id');
-//         localStorage.removeItem(user);
-//         localStorage.removeItem('0');
-//         window.location.href = 'lobby.html';
-//       } else {
-//       }
-//     }); 
-// }
-
-// function bet_money() {
-//   const user = localStorage.getItem('id');
-//   const room_id = localStorage.getItem('room_id');
-//   const bet_money = document.getElementById('bet-money').value;
-//   // const bet_money = 100
-
-
-//   const data = {
-//     user_id: user,
-//     room_id: room_id,
-//     bet: bet_money
-//   }
-
-//   console.log(data);
-//   axios.post('http://127.0.0.1:3000/users/bet', data)
-//     .then(response => {
-//       if (response.data.message === 'Successful') {
-//         console.log(response.data)
-
-//         const betContainer = document.querySelector('.bet');
-//         const betbutton = document.querySelector('.click');
-
-//         betContainer.classList.remove('active');
-//         betbutton.classList.remove('active');
-//         localStorage.setItem('run', '1')
-//       } else {
-//       }
-//     }); 
-// }
-
-// var count = 10 ;
-
-// function countdown() {
-
-//   const show = document.getElementById('time');
-
-//   show.innerHTML = count;
-
-//   count -- ;
-
-//   if(count >= 0) {
-
-//     if (localStorage.getItem("round") != 0) {
-//       if (localStorage.getItem("getcard") == 0) {
-//         getacard();
-//       }
-//     }
-    
-//     setTimeout(countdown, 1000);
-
-//   } else {
-
-//     show.innerHTML = '0';
-
-//     const room_id = localStorage.getItem('room_id');
-//     const data = {
-//       room_id: room_id
-//     }
-
-//     count += 11;
-//     if (localStorage.getItem("round") == 0) {
-//       for (var i = 1; i < 6 ; i++) {
-
-//         if (document.getElementById('name_player' + i).innerHTML == document.getElementById('name') && 
-//             document.getElementById('money_player' + i).innerHTML != '0 ฿' ) {
-
-//           const betContainer = document.querySelector('.bet');
-//           const betbutton = document.querySelector('.click');
-
-//           betContainer.classList.remove('active');
-//           betbutton.classList.remove('active');
-
-//         }
-//       }
-
-//     } else if (localStorage.getItem("round") == 1) {
-
-//       winner();
-    
-//     }
-    
-//     const getAcardContainer = document.querySelector('.getAcard');
-//     getAcardContainer.classList.remove('show');
-
-//   }
-// }
-
-// function choose_chair(i) {
-  
-//   for (let n = 1; n < 6; n++) {
-//     var check =  document.getElementById('name_player' + n).textContent
-//     var namecheck = document.getElementById('name').textContent
-//     console.log(namecheck, check)
-//     if (check == namecheck) {
-//       document.getElementById('name_player' + n).innerHTML = 'ชื่อผู้ใช้'
-//       document.getElementById('money_player' + n).innerHTML = '0 ฿'
-//       document.getElementById('pic_player' + n).src ="/image/no_player.png"
-//       document.getElementById('point' + n).style.opacity = 0
-//     }
-//   }
-    
-
-//   var name = 'name_player' + i;
-//   var seatmoney = 'money_player' + i;
-//   var pic = 'pic_player' + i;
-  
-//   var seat = 0 
-
-//   const user = localStorage.getItem('id');
-//   const room_id = localStorage.getItem('room_id');
-
-//   for (let n = 1; n < 6; n++) {
-//     if (document.getElementById('name_player' + n).innerHTML != 'ชื่อผู้ใช้') {
-//       seat ++;
-//     }
-//     if (seat == '0') {
-//       localStorage.setItem('head', 1);
-//     }
-//   }
-
-//   const data = {
-//     user_id: user,
-//     room_id: room_id,
-//     chair: i
-//   }
-
-//   axios.post('http://127.0.0.1:3000/users/choose_chair', data)
-//     .then(response => {
-//       if (response.data.message === 'Successful') {
-
-//         console.log(response.data.data);
-//         document.getElementById('name_player' + i).innerHTML = document.getElementById('name').textContent
-//         document.getElementById('money_player' + i).innerHTML = '0 ฿'
-//         document.getElementById('pic_player' + i).src = document.getElementById('profile').src
-//         document.getElementById('point' + i).style.opacity = 1
-        
-//         localStorage.setItem('chair', response.data.sitONtable)
-
-//         const betContainer = document.querySelector('.bet');
-//         const betbutton = document.querySelector('.click');
-      
-//         betContainer.classList.add('active');
-//         betbutton.classList.add('active');
-
-
-//       } else {
-//       }
-//     }); 
- 
-// }
-
-// function show_chair() {
-  
-//   const data = {
-//     room_id: localStorage.getItem('room_id')
-//   }
-
-//   axios.post('http://127.0.0.1:3000/users/show_chair', data)
-//     .then(response => {
-//       if (response.data.message === 'Successful') {
-
-//         const players = response.data.data;
-
-//         localStorage.setItem('bot', players[0].bet)
-        
-//         for (let n = 1; n < 6; n++) {
-//           document.getElementById('name_player' + n).innerHTML = 'ชื่อผู้ใช้'
-//           document.getElementById('money_player' + n).innerHTML = '0 ฿'
-//           document.getElementById('pic_player' + n).src ="/image/no_player.png"
-//           document.getElementById('point' + n).style.opacity = 0
-//         }
-
-//         for (let i = 0; i < players.length; i++) {
-//           const player = players[i];
-
-//           if (player.chair != 0) {
-
-//             document.getElementById('name_player' + player.chair).innerHTML = player.username
-//             document.getElementById('money_player' + player.chair).innerHTML = player.bet + ' ฿'
-//             document.getElementById('pic_player' + player.chair).src = document.getElementById('profile').src
-
-//             // if (document.getElementById('money_player' + player.chair).innerHTML != '0' && 
-//             //     document.getElementById('time').innerHTML != '0' ||
-//             //     document.getElementById('time').innerHTML != '10' || 
-//             //     document.getElementById('time').innerHTML != 'TIME') {
-//             // } 
-
-//             if (document.getElementById('name_player' + player.chair).innerHTML == document.getElementById('name').innerHTML) {
-//                 document.getElementById('point' + player.chair).style.opacity = 1
-
-//             }
-//           }  
-           
-
-//         }
-
-//       } else {
-//       }
-//     }); 
-  
-// }
-
-// var bot_count = 0;
-// function start_game( i ) {
-//   const room_id = localStorage.getItem('room_id');
-
-//   if (localStorage.getItem('bot') == '1' && localStorage.getItem('head') == '1') {
-//     const data = { 
-//       room_id: room_id ,
-//       user_id: localStorage.getItem('id'),
-//       chair: 0
-//     };
-//     axios.post('http://127.0.0.1:3000/users/start_game', data)
-//     .then(response => {
-//       console.log(1);
-//       if (response.data.message === 'Successful') {
-//         var botCardsContainer = document.querySelector('.card-bot');
-//         var botCards = botCardsContainer.querySelectorAll('img');
-//         botCards.forEach(function(card, index) {
-//           if (index == 2) {
-//             card.style.opacity = '1';
-//           }
-//         });
-//       }    
-//     });
-//   }
-
-//   const data = { 
-//     room_id: room_id ,
-//     user_id: localStorage.getItem('id'),
-//     chair: i
-//   };
-
-//   axios.post('http://127.0.0.1:3000/users/start_game', data)
-//     .then(response => {
-//       if (response.data.message === 'Successful') {
-//         var botCardsContainer = document.querySelector('.card-bot');
-//         var botCards = botCardsContainer.querySelectorAll('img');
-//         botCards.forEach(function(card, index) {
-//           if (index < 2) {
-//               card.style.opacity = '1';
-//           };
-//         });
-
-//         for (let n = 1; n < 6; n++) {
-//           var playerCardsContainer = document.querySelector('.card-player' + n);
-//           var playerCards = playerCardsContainer.querySelectorAll('img');
-
-//           if (document.getElementById('money_player' + n).innerHTML != '0 ฿')  {
-//             playerCards.forEach(function(card, index) {
-//               if (index < 2) {
-//                   card.style.opacity = '1';
-//               }
-//             });
-//           }
-//         };
-        
-//         var returnValue = response.data.data
-        
-//         var num = 0
-//         returnValue.forEach (item => {
-//           let playerData = JSON.parse(localStorage.getItem(item.user_id));
-//           if (item.user_id == localStorage.getItem('id')) {
-//             const seat = item.chair
-//             document.getElementById('point' + seat).innerHTML = item.result_point + ' point'
-
-//             var playerCardsContainer = document.querySelector('.card-player' + item.chair);
-//             var playerCards = playerCardsContainer.querySelectorAll('img');
-
-//             playerCards[num].src = `/image/card/${item.card_id}.svg`;
-
-//             num++;
-//           }  
-          
-//           playerData.point = item.result_point
-//           localStorage.setItem(item.user_id, JSON.stringify(playerData));
-
-//         });
-
-//         num = 0;
-
-//         let random_bot = Math.floor(Math.random() * 2) 
-//         if (random_bot == 0 ) {
-//           random_bot = 4
-//         } else {
-//           random_bot = 5
-//         }
-
-//         for (let i = 0; i < returnValue.length; i++) {
-//           const item = returnValue[i];
-          
-//           if (item.user_id === '0' && item.result_point < random_bot + 1)  {
-//             const data = {
-//               user_id: '0',
-//               room_id: localStorage.getItem('room_id')
-//             };
-
-//             axios.post('http://127.0.0.1:3000/users/getAcard', data)
-//               .then(response => {
-//                 console.log(1);
-//                 if (response.data.message === 'Successful') {
-//                   var returnValue = response.data.data[0];
-//                   let playerData = JSON.parse(localStorage.getItem('0'));
-//                   playerData.point = returnValue.result_point;
-//                   localStorage.setItem('0', JSON.stringify(playerData));
-//                   var botCardsContainer = document.querySelector('.card-bot');
-//                   var botCards = botCardsContainer.querySelectorAll('img');
-//                   botCards.forEach(function(card, index) {
-//                     if (index == 2) {
-//                       card.style.opacity = '1';
-//                     }
-//                   });
-//                 }    
-//               });
-
-//             break;
-//           }
-//         }
-
-//         localStorage.setItem('getcard', 0);
-//         localStorage.setItem('round', 1)
-//         countdown();
-//       }
-//     });
-// }
-
-
-// var button = document.getElementById('getAcard');
-
-// button.addEventListener('click', card);
-
-// function getacard() {
-
-//   const getAcardContainer = document.querySelector('.getAcard');
-
-//   console.log(getAcardContainer)
-
-//   getAcardContainer.classList.add('show');
-
-// }
-
-// function card() {
-//   localStorage.setItem('getcard', 1);
-//   const data = {
-//     user_id: localStorage.getItem('id'),
-//     room_id: localStorage.getItem('room_id'),
-//   }
-  
-//   axios.post('http://127.0.0.1:3000/users/getAcard', data)
-//     .then(response => {
-//       console.log('a')
-//       if (response.data.message === 'Successful') {
-//         console.log(response);
-//         var returnValue = response.data.data[0]
-//         var playerCardsContainer = document.querySelector('.card-player' + returnValue.chair);
-//         var playerCards = playerCardsContainer.querySelectorAll('img');
-//         console.log(response.data.data, (returnValue));
-//         playerCards.forEach(function(card, index) {
-//           if (index > 1) {
-//               card.style.opacity = '1';
-//           }
-//         });
-
-//         const all_card = response.data.data
-
-//         var playerCardsContainer = document.querySelector('.card-player' + all_card[0].chair);
-//         var playerCards = playerCardsContainer.querySelectorAll('img');
-
-//         playerCards.forEach(function(cards, index) {
-//           const card = all_card.filter(item => item.chair === all_card[0].chair);
-//           if (card.length > index) {
-//             playerCards[index].src = `/image/card/${card[index].card_id}.svg`;
-//             }
-//         });
-
-//         const player = response.data.data[0];
-//         const seat = player.chair
-//         document.getElementById('point' + seat).innerHTML = player.result_point + ' point'
-        
-//         let playerData = JSON.parse(localStorage.getItem(returnValue.user_id));
-//         playerData.point = returnValue.result_point
-//         localStorage.setItem(returnValue.user_id, JSON.stringify(playerData));
-        
-//         const getAcardContainer = document.querySelector('.getAcard');
-//         getAcardContainer.classList.remove('show');
-
-//       } else {
-//       }
-//     });
-// }
-
-// function winner() {
-//   const data = {
-//     room_id: localStorage.getItem('room_id'),
-//   }
-
-//   axios.post('http://127.0.0.1:3000/users/winner', data)
-//   .then(response => {
-//     if (response.data.message === 'Successful') {
-      
-//       const data = response.data.winner[0]
-//       console.log('data-player' + data.chair)
-//       if (data.chair != 0) {
-//       document.getElementById('data-player' + data.chair).classList.add('active');
-//       document.getElementById('pic_player' + data.chair).classList.add('active');
-//       };
-
-//       const card = response.data.all_card
-//       for (let n = 1; n < 6; n++) {
-//         var playerCardsContainer = document.querySelector('.card-player' + n);
-//         var playerCards = playerCardsContainer.querySelectorAll('img');
-//         var check = document.getElementById('name_player' + n).textContent;
-//         if (check !== 'ชื่อผู้ใช้') {
-//           playerCards.forEach(function(cards, index) {
-//             const playerCardData = card.filter(item => item.chair === n);
-//             if (playerCardData.length > index) {
-//               playerCards[index].src = `/image/card/${playerCardData[index].card_id}.svg`;
-//             }
-//           });
-//         }
-//       }
-
-//       var botCardsContainer = document.querySelector('.card-bot');
-//       var botCards = botCardsContainer.querySelectorAll('img');
-//       const botCardData = card.filter(item => item.chair === 0);
-//       console.log(botCardData);
-//       botCards.forEach(function(cards, index) {
-//         if (botCardData.length > index) {
-//           cards.src = `/image/card/${botCardData[index].card_id}.svg`;
-//         }
-//       });
-//     setTimeout(finish, 5000);
-//     }
-//   }); 
-// }
-
-
-// function finish() {
-
-//   document.getElementById('time').innerHTML = 'TIME';
-
-//   const data = {
-//     room_id: localStorage.getItem('room_id'),
-//   }
-
-//   axios.post('http://127.0.0.1:3000/users/finish', data)
-//   .then(response => {
-//     if (response.data.message === 'Successful') {
-//       localStorage.setItem('round', 0)
-
-//       for (let n = 1; n < 6; n++) {
-//         var playerCardsContainer = document.querySelector('.card-player' + n);
-//         var playerCards = playerCardsContainer.querySelectorAll('img');
-//         playerCards.forEach(function(card, index) {
-//           card.src = `/image/card/backcardred.svg`;
-//           card.style.opacity = '0';
-//           });
-//         }
-//         var botCardsContainer = document.querySelector('.card-bot');
-//         var botCards = botCardsContainer.querySelectorAll('img');
-//         botCards.forEach(function(card, index) {
-//           card.src = `/image/card/backcardred.svg`;
-//           card.style.opacity = '0';
-//         });
-
-//         for (i = 1; i < 6; i++) {
-//         document.getElementById('data-player' + i).classList.remove('active');
-//         document.getElementById('pic_player' + i).classList.remove('active');
-//         document.getElementById('point' + i).innerHTML = '0 point'        
-//         };
-
-//         const betContainer = document.querySelector('.bet');
-//         const betbutton = document.querySelector('.click');
-      
-//         betContainer.classList.add('active');
-//         betbutton.classList.add('active');
-
-//         makeInterval()
-//       };
-//   }); 
-
-
-
-// }

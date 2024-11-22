@@ -28,8 +28,7 @@ app.post('/users/login', async (req, res) => {
     try {
         const [login] = await con.query(`select * from users where ID = '${ID}' and password = '${password}'`)
         res.status(201).json({
-            message: "Successful",
-            data: login[0].name
+            message: "Successful"
 
         })
     } catch (error) {
@@ -149,6 +148,79 @@ app.post('/users/show_question', async (req, res) => {
         res.status(201).json({
             message: "Successful",
             data: data
+        })
+    } catch (error) {
+        res.status(401).json({
+            message: "Error"
+        })
+    }
+})
+
+app.post('/users/history', async (req, res) => {
+    let ID = req.body.ID
+    try {
+        const [round] = await con.query(`select round from examresult where ID = '${ID}'`)
+        const date = await con.query(`SELECT
+            CONCAT(
+                CASE DAYOFWEEK(Expiration_date)
+                    WHEN 1 THEN 'วันอาทิตย์'
+                    WHEN 2 THEN 'วันจันทร์'
+                    WHEN 3 THEN 'วันอังคาร'
+                    WHEN 4 THEN 'วันพุธ'
+                    WHEN 5 THEN 'วันพฤหัสบดี'
+                    WHEN 6 THEN 'วันศุกร์'
+                    WHEN 7 THEN 'วันเสาร์'
+                END,
+                'ที่ ',
+                DAY(Expiration_date),
+                ' ',
+                CASE MONTH(Expiration_date)
+                    WHEN 1 THEN 'มกราคม'
+                    WHEN 2 THEN 'กุมภาพันธ์'
+                    WHEN 3 THEN 'มีนาคม'
+                    WHEN 4 THEN 'เมษายน'
+                    WHEN 5 THEN 'พฤษภาคม'
+                    WHEN 6 THEN 'มิถุนายน'
+                    WHEN 7 THEN 'กรกฎาคม'
+                    WHEN 8 THEN 'สิงหาคม'
+                    WHEN 9 THEN 'กันยายน'
+                    WHEN 10 THEN 'ตุลาคม'
+                    WHEN 11 THEN 'พฤศจิกายน'
+                    WHEN 12 THEN 'ธันวาคม'
+                END,
+                ' ',
+                YEAR(Expiration_date)
+            ) AS date
+            FROM examresult where ID = '${ID}';`)
+        res.status(201).json({
+            message: "Successful",
+            round: round,
+            date: date[0]
+        })
+    } catch (error) {
+        res.status(401).json({
+            message: "Error"
+        })
+    }
+})
+
+app.post('/users/show_score', async (req, res) => {
+    let ID = req.body.ID
+    try {
+        const [teamleader] = await con.query(`select L, M, Exempt from teamleader join examresult on teamleader.Result_number = examresult.Result_number where examresult.ID = '${ID}'`)
+        const [tu100] = await con.query(`select D, V, G, Exempt from tu100 join examresult on tu100.Result_number = examresult.Result_number where examresult.ID = '${ID}'`)
+        const [tu101] = await con.query(`select H, Z, Y, C, T, Exempt from tu101 join examresult on tu101.Result_number = examresult.Result_number where examresult.ID = '${ID}'`)
+        const [tu102] = await con.query(`select U, A, P, Exempt from tu102 join examresult on tu102.Result_number = examresult.Result_number where examresult.ID = '${ID}'`)
+        const [tu103] = await con.query(`select I, S, O, Exempt from tu103 join examresult on tu103.Result_number = examresult.Result_number where examresult.ID = '${ID}'`)
+        const [tu106] = await con.query(`select R, B, W, E, F, Exempt from tu106 join examresult on tu106.Result_number = examresult.Result_number where examresult.ID = '${ID}'`)
+        res.status(201).json({
+            message: "Successful",
+            teamleader: teamleader,
+            tu100: tu100,
+            tu101: tu101,
+            tu102: tu102,
+            tu103: tu103,
+            tu106: tu106
         })
     } catch (error) {
         res.status(401).json({
