@@ -10,17 +10,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="Header">
-        <div class="AboutHeaderLeft">
-            <a href="main.html">
-                <img src="/image/Logo_TU.png" alt="Logo">
-            </a>
-        </div>
-        <div class="AboutHeaderRight">
-            <div></div>
-            <img id="dropdownmenu" src="/image/dropdownmenu.png" alt="">
-        </div>
-    </div>
+    <nav>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#5f6368"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+            <li><a href="register.html">Booking</a></li>
+            <li><a href="history.html">Score</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a onclick="logout()" href="login.html" >Log out</a></li>
+        </ul>
+        <ul>
+            <li><a href="main.html"><img class="image1" src="/image/Logo_TU.png" alt="Logo">GREATS</a></li>
+            <li><a class="hidetext" href="register.html">Booking</a></li>
+            <li><a class="hidetext" href="history.html">Score</a></li>
+            <li><a class="hidetext" href="forum.html">Forum</a></li>
+            <li><a class="hidetext" onclick="logout()" href="login.html" >Log out</a></li>
+            <li class="menu-button" onclick=showSidebar()><a><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+        </ul>
+    </nav>
     <div style="padding: 2%;"></div>
     <div class="topic">
         <div>Q&A</div>
@@ -66,12 +72,41 @@
             </li>
         </ul>
     </div>
-        <div class="Box-Question">
-            <button>SEND Q&A</button>
-        </div>
+    <div id="OpenQuestion" class="Box-Question">
+        <button>SEND Q&A</button>
     </div>
+    <div id="QuestionBox" class="container hideQuestionBox">
+        <div class="signup-box">
+            <h2>Question</h2>
+            <p>เขียนสิ่งที่ต้องการรู้เกี่ยว TU-Greats ลงในช่องด้านล่าง</p>
+            <div class="input-container">
+                <input type="text" placeholder="Enter your question" required id="textqa">
+                <button class="icon" onclick="sendQA()">&#9993;</button>
+            </div>
+        </div>
+        <button class="CloseQuestion">Close</button>
+    </div>
+
+    <script>
+        const OpenQuestion = document.querySelector('#OpenQuestion')
+        const QuestionBox = document.querySelector('#QuestionBox')
+        const CloseQuestion = document.querySelector('.CloseQuestion')
+
+        OpenQuestion.addEventListener('click', () => {
+            QuestionBox.classList.toggle('hideQuestionBox')
+        })
+        
+        document.addEventListener('click', e => {
+            if (!OpenQuestion.contains(e.target) && e.target == CloseQuestion) {
+                QuestionBox.classList.add('hideQuestionBox')
+            }
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/app/script.js"></script>
     <script>
         QA()
     </script>
+    <script src="/app/popup.js"></script>
 </body>
 </html>
