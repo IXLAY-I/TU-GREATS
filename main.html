@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <nav>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#5f6368"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+            <li><a href="register.html">Booking</a></li>
+            <li><a href="history.html">Score</a></li>
+            <li><a href="Q&A.html">Q&A</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a onclick="logout()" href="login.html" >Log out</a></li>
+        </ul>
+        <ul>
+            <li><a href="main.html"><img class="image1" src="/image/Logo_TU.png" alt="Logo">GREATS</a></li>
+            <li><a class="hidetext" href="register.html">Booking</a></li>
+            <li><a class="hidetext" href="history.html">Score</a></li>
+            <li><a class="hidetext" onclick="logout()" href="login.html" >Log out</a></li>
+            <li class="menu-button" onclick=showSidebar()><a><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg></a></li>
+        </ul>
+    </nav>
+    <div class="BoxMainImage">
+        <div class="container">
+            <div class="slider">
+                <div class="slides" style="--img: url('/image/imageEnd.png')">
+                    <div class="content">
+                        <h2 style="color: white;">สอบถามเพิ่มเติม</h2>
+                        <p style="color: white;">Email: smart@tbs.tu.ac.th</p>
+                        <a href="https://www.facebook.com/ThammasatCompetencyTestCenter" target="_blank">https://www.facebook.com/ThammasatCompetencyTestCenter</a>
+                    </div>
+                </div>
+                <div class="slides" style="--img: url('/image/Date.png')">
+                    <div class="content">
+                        <h2>กำหนดการสอบ</h2>
+                        <p style="color: red; font-size: 1.2rem;">ช่วงรับสมัคร 23 กันยายน (ตั้งแต่เวลา 9.00 น.) ถึง 8 ตุลาคม 2567 (เวลา 20.00 น.)<br><br><br> สมัครด้านล่างได้เลย!!</p>
+                    </div>
+                </div>
+                <div class="slides" style="--img: url('/image/image1.png')">
+                    <div class="content">
+                        <h2>ข้อควรรู้ก่อนสอบ</h2>
+                        <button id="SeeMoreInformation">See More</button>
+                    </div>
+                </div>
+                <div class="slides" style="--img: url('/image/image2.png')">
+                    <div class="content">
+                        <h2>ข้อปฏิบัติของผู้เข้าสอบ</h2>
+                        <button id="SeeMoreRuleHee">See More</button>
+                    </div>
+                </div>
+                <div class="slides" style="--img: url('/image/image3.png')">
+                    <div class="content">
+                        <h2>หลักการสอบ</h2>
+                        <p>
+                            นักศึกษาธรรมศาสตร์ ตั้งแต่ปีการศึกษา 2561 มีสิทธิ์เข้าทดสอบเพื่อประเมินสมรรถนะตนเองว่ามีคุณสมบัติ GREATS ในแต่ละด้านอยู่ในระดับใดชุดข้อสอบวัดสมรรถนะ 6 ด้าน ใช้เวลาในการสอบด้านละ 30 นาที รวมเวลาในการทำข้อสอบทั้งสิ้น 3 ชั่วโมง
+                        </p>
+                    </div>
+                </div>
+                <div class="slides" style="--img: url('/image/image4.png')">
+                    <div class="content">
+                        <h2>ตรวจสอบผลคะแนน GREATS 2/2567</h2>
+                        <button class="viewscore"><a href="/history.html">Click Here</a></button>
+                    </div>
+                </div>
+                <div class="slides" style="--img: url('/image/image5.png')">
+                    <div class="content">
+                        <h2 style="color: white;">TU GREATS</h2>
+                        <p style="color: white;"> เป็นการทดสอบสมรรถนะสำหรับนักศึกษามหาวิทยาลัยธรรมศาสตร์ ตามนโยบายการพัฒนามหาวิทยาลัยในศตวรรษที่ 21 คือการสร้างบัณฑิตให้มีลักษณะที่เป็นผู้นำของศตวรรษที่ 21 ซึ่งการจะเป็นผู้นำในศตวรรษที่ 21 นั้น นักศึกษาควรมีคุณสมบัติครอบคลุม 6 ด้าน ดังนี้</p>
+                        <button id="SeeMoreWhatIsGreats">See More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons">
+                <span class="prev"></span>
+                <span class="next"></span>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="regis">
+            <div class="register">
+                <h3>BOOKING GREATS SEAT</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+            </div>
+            <div class="data">
+                <div class="center">
+                    <label>ศูนย์สอบ :</label>
+                    <div class="select-container">
+                        <select class="select-box">
+                            <option value="none">-</option>
+                            <option value="rangsit">รังสิต</option>
+                            <option value="thaprachan">ท่าพระจันทร์</option>
+                            <option value="lampang">ลำปาง</option>
+                            <option value="pattaya">พัทยา</option>
+                        </select>
+                        <div class="icon-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="date">
+                    <button class="date-item" data-date="01/12/64">
+                        วันเสาร์ ที่ xx<br>
+                        เดือน xx พศ. xxxx
+                    </button>
+                    <button class="date-item" data-date="02/12/64">
+                        วันอาทิตย์ ที่ xx<br>
+                        เดือน xx พศ. xxxx
+                    </button>
+                    <button class="date-item" data-date="03/12/64">
+                        วันจันทร์ ที่ xx<br>
+                        เดือน xx พศ. xxxx
+                    </button>
+                </div>
+                <div class="Time">
+                    <button class="Time-item" data-time="09.00 - 12.00 น.">09.00 - 12.00 น.</button>
+                    <button class="Time-item" data-time="13.00 - 16.00 น.">13.00 - 16.00 น.</button>
+                </div>
+                <div class="submit">
+                    <div>
+                        <p>*สามารถสมัครสอบได้เพียงครั้งเดียว หากมีการสมัครสอบซ้ำจะทำการยกเลิกสิทธิ์การสมัครสอบในรอบนี้ไป*</p>
+                    </div>
+                    <button class="submit-button"onclick="register()">ยืนยันการสมัครสอบ</button>
+                </div>
+            </div>
+        </div>
+        <div class="BoxDetail">
+            <div class="TheBox1" onclick="window.location.href='forum.html'">
+                <img style="border-radius: 10px;" src="/image/forum.png" alt="Forum">
+                <div>
+                    <h1>GREAT FORUM</h1>
+                    <p class="hidetext" style="font-size: 1.2vw;">ช่องทางนี้ใช้สำหรับตั้งกระทู้เพื่อพูดคุยถามแนวข้อสอบเท่านั้น ห้ามส่งข้อความก่อกวนโดยเด็ดขาด</p>
+                </div>
+            </div>
+            <div class="TheBox1" onclick="window.location.href='Q&A.html'">
+                <img style="border-radius: 10px;" src="/image/Q&A.png" alt="Forum">
+                <div>
+                    <h1>Q & A</h1>
+                    <p class="hidetext" style="font-size: 1.2vw;">ช่องทางนี้ใช้สำหรับตรวจสอบคำถามที่พบบ่อยจากนักศึกษา <br>
+                        และตอบกลับโดยแอดมินผู้ดูแลระบบ
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="Information" class="container1 hideInformation">
+        <div class="Popup1">
+            <div class="BoxPopup1">
+                <div class="PopupImage1"><img src="/image/Logo_TU.png" alt="Logo" width="15%"></div>
+                <div class="Popupcontent1">
+                    <p>
+                        1. นักศึกษารหัสปี 61-63 ใช้คูปองในระบบสมัครสอบ (กรณีมีคูปองแต่สมัครและชำระเงิน ไม่สามารถขอคืนเงินได้)<br>
+                        2. นักศึกษารหัสปี 64-67 ชำระค่าสมัครสอบ 300 บาท ต่อหนึ่งรอบ<br>
+                        3. เมื่อชำระเงินค่าสมัครสอบแล้วเก็บสลิปไว้ หากสถานะการชำระเงินไม่เปลี่ยนให้ติดต่อ https://www.facebook.com/ThammasatCompetencyTestCenter รอการปรับปรุง ห้ามชำระซ้ำเด็ดขาด เมื่อสมัครสอบแล้วไม่สามารถเปลี่ยนรอบสอบ เลื่อนสอบ ยกเลิกการสอบ หรือ มอบสิทธิ์ให้ผู้อื่นได้ การสมัครสอบที่นอกเหนือจากข้อกำหนดถือเป็นโมฆะ และสงวนสิทธิ์ไม่คืนเงินในทุกกรณี<br>
+                        4. การใช้ผลสอบ GREATS เพื่อขอยกเว้นวิชาศึกษาทั่วไปส่วนที่ 1 สอบกี่ครั้งก็ได้ ให้ยื่นเทียบได้ตามที่งานวิชาการ มธ. กำหนด<br>
+                        5. หากนักศึกษาลงทะเบียนเรียนวิชาศึกษาทั่วไปส่วนที่ 1 และได้เกรดแล้ว ไม่สามารถนำผลสอบมาเทียบได้ ยกเว้น F และ W<br>
+                        6. หลักสูตร IBMP ไม่สามารถนำผลสอบวิชา Spirit of Thammasat มายื่นยกเว้นวิชา TU 100 ได้ นศ.รหัส 66 เป็นต้นไปสามารถยื่นเซ้ม TU100 ได้<br>
+                        7. สามารถสมัครสอบได้ทุกศูนย์ตามที่นักศึกษาสะดวก เช่น เรียนที่ศูนย์ลำปาง แต่อยู่ใกล้รังสิตก็สอบที่รังสิตได้<br>
+                        8. ให้เลือกสมัครสอบได้เพียง 1 รอบต่อวัน เท่านั้น เพื่อให้มีจำนวนที่นั่งสอบเพียงพอกับนักศึกษาทุกคน หากสมัครสอบซ้ำรอบใน 1 วันจะถือว่าการสมัครสอบเป็นโมฆะ และไม่คืนเงินในทุกกรณี<br>
+                    </p>
+                </div>
+                <div class="PopupClose1">
+                    <button id="CloseInformation">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="RuleHee" class="container2 hideRuleHee">
+        <div class="Popup2">
+            <div class="BoxPopup2">
+                <div class="PopupImage2"><img src="/image/Logo_TU.png" alt="Logo" width="15%"></div>
+                <div class="Popupcontent2">
+                    <p>
+                        1. ควรมาถึงห้องสอบก่อนเวลาสอบไม่น้อยกว่า 30 นาที หลังเริ่มสอบไปแล้ว 30 นาทีไม่อนุญาตให้เข้าห้องสอบและไม่คืนเงินในทุกกรณี<br>
+                        2. เตรียมดินสอ 2B และ ยางลบดินสอ อนุญาตให้นำสิ่งของเข้าห้องสอบ ปิดเครื่องมือสื่อสารทุกชนิดวางไว้ใต้โต๊ะสอบ วางบัตรนักศึกษา หรือ บัตรประชาชนไว้บนโต๊ะสอบ<br>
+                        3. ไม่อนุญาตให้ใส่นาฬิกาข้อมือทุกชนิดในห้องสอบ (ในห้องสอบมีนาฬิกากลาง)<br>
+                        4. ต้องใส่หน้ากากอนามัยตลอดเวลาที่อยู่ในอาคารสอบและห้องสอบ<br>
+                        5. แต่งกายด้วยชุดนักศึกษาหรือชุดสุภาพ<br>
+                    </p>
+                </div>
+                <div class="PopupClose2">
+                    <button id="CloseRuleHee">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="WhatIsGreats" class="container3 hideWhatIsGreats">
+        <div class="Popup3">
+            <div class="BoxPopup3">
+                <div class="PopupImage3"><img src="/image/Logo_TU.png" alt="Logo" width="15%"></div>
+                <div class="Popupcontent3">
+                    <p>
+                        G: Global Mindset (TU101) ทันโลก ทันสังคม เท่าทันการเปลี่ยนแปลงของโลกในมิติต่างๆ<br>
+                        R: Responsibility (TU103) มีสำนึกรับผิดชอบอย่างยั่งยืน ต่อตนเอง บุคคลรอบข้าง สังคม และสิ่งแวดล้อม<br>
+                        E: Eloquence (TU106) สามารถสื่อสารอย่างสร้างสรรค์และทรงพลัง มีทักษะสุนทรียะสนทนา<br>
+                        A: Aesthetic Appreciation (TU102) ซาบซึ้งในความงาม คุณค่าของศิลปะ ดนตรี และสถาปัตยกรรม<br>
+                        T: Team Leader ทำงานร่วมกับผู้อื่นได้ทั้งในบทบาทผู้นำ และบทบาททีม<br>
+                        S: Spirit of Thammasat (TU100) ใฝ่ประชาธิปไตย มีจิตใจรักความเป็นธรรม มีความกล้าหาญและอุทิศตนเพื่อประชาชน<br>
+                    </p>
+                </div>
+                <div class="PopupClose3">
+                    <button id="CloseWhatIsGreats">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/app/slide.js"></script>
+    <script src="/app/popup.js"></script>
+    <script src="/app/register.js"></script>
+    <script src="/app/script.js"></script>
+</body>
+</html>
