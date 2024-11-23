@@ -44,6 +44,9 @@
                     <p>งานของเราจะเสร็จหรือไม่? หากใช้ pair game programming.</p>
                 </div>
             </div>
+            <div class="AskQuestion">
+                <button id="OpenQuestion"><i class="fa-solid fa-circle-question"></i> comment</button>
+            </div>
             <h2>Comment</h2>
             <div class="all-comment">
                 <div class="comment">
@@ -79,6 +82,32 @@
             </div>
         </div>
     </div>
+    <div id="QuestionBox" class="container hideQuestionBox">
+        <div class="signup-box">
+            <h2>Comment</h2>
+            <p>แสดงความคิดเห็นเกี่ยวกับหัวข้อข้างต้น</p>
+            <div class="input-container">
+                <input type="text" placeholder="comment" required>
+                <button class="icon">&#9993;</button>
+            </div>
+        </div>
+        <button class="CloseQuestion">Close</button>
+    </div>
+    <script>
+        const OpenQuestion = document.querySelector('#OpenQuestion')
+        const QuestionBox = document.querySelector('#QuestionBox')
+        const CloseQuestion = document.querySelector('.CloseQuestion')
+
+        OpenQuestion.addEventListener('click', () => {
+            QuestionBox.classList.toggle('hideQuestionBox')
+        })
+
+        document.addEventListener('click', e => {
+            if (!OpenQuestion.contains(e.target) && e.target == CloseQuestion) {
+                QuestionBox.classList.add('hideQuestionBox')
+            }
+        })
+    </script>
     <script src="/app/popup.js"></script>
 </body>
 
