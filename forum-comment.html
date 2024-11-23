@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="/css/forum-comment.css">
+</head>
+
+<body>
+    <nav>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26px"
+                        viewBox="0 -960 960 960" width="26px" fill="#5f6368">
+                        <path
+                            d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                    </svg></a></li>
+            <li><a href="register.html">Booking</a></li>
+            <li><a href="history.html">Score</a></li>
+            <li><a href="Q&A.html">Q&A</a></li>
+            <li><a href="forum.html">Forum</a></li>
+            <li><a onclick="logout()" href="login.html">Log out</a></li>
+        </ul>
+        <ul>
+            <li><a href="main.html"><img class="image1" src="/image/Logo_TU.png" alt="Logo">GREATS</a></li>
+            <li><a class="hidetext" href="register.html">Booking</a></li>
+            <li><a class="hidetext" href="history.html">Score</a></li>
+            <li><a class="hidetext" href="Q&A.html">Q&A</a></li>
+            <li><a class="hidetext" href="forum.html">Forum</a></li>
+            <li><a class="hidetext" onclick="logout()" href="login.html">Log out</a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                        height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368">
+                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                    </svg></a></li>
+        </ul>
+    </nav>
+    <div class="container-forum">
+        <div class="content">
+            <h2>Section</h2>
+            <div class="section">
+                <h2>Question</h2>
+                <div class="inner-content">
+                    <p>งานของเราจะเสร็จหรือไม่? หากใช้ pair game programming.</p>
+                </div>
+            </div>
+            <h2>Comment</h2>
+            <div class="all-comment">
+                <div class="comment">
+                    <h2>นิรนาม</h2>
+                    <div class="inner-content">
+                        <p>ไม่น่ารอดนะครับ ผมคิดว่านะ</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <h2>นิรนาม</h2>
+                    <div class="inner-content">
+                        <p>ไม่น่ารอดนะครับ ผมคิดว่านะ</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <h2>นิรนาม</h2>
+                    <div class="inner-content">
+                        <p>ไม่น่ารอดนะครับ ผมคิดว่านะ</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <h2>นิรนาม</h2>
+                    <div class="inner-content">
+                        <p>ไม่น่ารอดนะครับ ผมคิดว่านะ</p>
+                    </div>
+                </div>
+                <div class="comment">
+                    <h2>นิรนาม</h2>
+                    <div class="inner-content">
+                        <p>ไม่น่ารอดนะครับ ผมคิดว่านะ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/app/popup.js"></script>
+</body>
+
+</html>

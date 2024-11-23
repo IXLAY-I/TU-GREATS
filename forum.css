@@ -1,0 +1,393 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    background-color: rgb(249, 207, 0);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    gap: 10px;
+}
+
+nav li {
+    height: 70px;
+}
+
+nav a {
+    height: 100%;
+    padding: 0 30px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: black;
+    font-size: clamp(1.5rem, 1.2vw, 3rem);
+}
+
+nav ul:first-child a:hover {
+    background-color: #f0f0f076;
+}
+
+nav a:hover {
+    background-color: rgb(255, 218, 34);
+}
+
+nav li:first-child {
+    margin-right: auto;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 300px;
+    z-index: 999;
+    background-color: rgba(255, 255, 255, 0.445);
+    backdrop-filter: blur(10px);
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.sidebar li {
+    width: 100%;
+}
+
+.sidebar a {
+    width: 100%;
+}
+
+.menu-button {
+    display: none;
+}
+
+.image1 {
+    height: 45px;
+    width: 45px;
+}
+
+.Banner {
+    background-image: url(/image/Banner.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 30.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.BoxSearch {
+    width: 40%;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.BoxSearch i {
+    font-size: 1rem;
+    color: gray;
+}
+
+.BoxSearch input {
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    outline: none;
+    background: transparent;
+}
+
+.BoxForumMain {
+    position: relative;
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    background-image: url(/image/Banner.jpeg);
+}
+
+.leftForum {
+    flex: 4;
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-room {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.section-room th,
+.section-room td {
+    padding: 15px;
+    font-size: 1rem;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.RightForum {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.BoxCategory {
+    background-color: #ffffff;
+    padding: 1.1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.BoxCategory h1 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.BoxCategory button {
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+tbody tr td,
+tbody tr td img,
+tbody tr td a {
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td,
+tbody tr.hide td a {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out;
+}
+
+.BoxCategory button.active {
+    background-color: #ffac09;
+    color: #ffffff;
+}
+
+.AskQuestion button {
+    background-color: #ffac09;
+    font-size: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+
+.AskQuestion button:hover {
+    background-color: #e89c00;
+}
+
+.AskQuestion {
+    display: grid;
+    justify-content: center;
+}
+
+.container {
+    position: fixed;
+    top: 20vw;
+    left: 30vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.signup-box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1vw;
+    width: 40vw;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.signup-box::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: #f4d03f;
+    border-radius: 0 0 10px 10px;
+    z-index: -1;
+}
+
+.signup-box h2 {
+    font-size: 1.5vw;
+    margin-bottom: 1vw;
+    color: #333;
+}
+
+.signup-box p {
+    font-size: 1vw;
+    margin-bottom: 1vw;
+    color: #999;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 12px 40px 12px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1vw;
+    color: #666;
+    outline: none;
+}
+
+.input-container .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #999;
+}
+
+.CloseQuestion {
+    background-color: #ffac09;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.CloseQuestion:hover {
+    background-color: #e89c00;
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+}
+
+.header-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.AboutHeaderRight {
+    height: 100%;
+    width: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+}
+
+.AboutHeaderRight img#dropdownmenu {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 150px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 4px;
+    display: none;
+}
+
+.AboutHeaderRight:hover .dropdown-menu {
+    display: block;
+}
+
+.hideQuestionBox {
+    display: none;
+}
+
+@media(max-width: 1024px) {
+    .hidetext {
+        display: none;
+    }
+
+    .menu-button {
+        display: block;
+    }
+}
+
+@media (max-width: 426px) {
+    .sidebar {
+        width: 100%;
+    }
+
+    .signup-box {
+        width: 300px;
+    }
+}

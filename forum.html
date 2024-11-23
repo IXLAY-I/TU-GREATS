@@ -1,0 +1,167 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum</title>
+    <link rel="stylesheet" href="/css/forum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <nav>
+        <ul class="sidebar">
+            <li onclick=hideSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="26px"
+                        viewBox="0 -960 960 960" width="26px" fill="#5f6368">
+                        <path
+                            d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                    </svg></a></li>
+            <li><a href="register.html">Booking</a></li>
+            <li><a href="history.html">Score</a></li>
+            <li><a href="Q&A.html">Q&A</a></li>
+            <li><a onclick="logout()" href="login.html">Log out</a></li>
+        </ul>
+        <ul>
+            <li><a href="main.html"><img class="image1" src="/image/Logo_TU.png" alt="Logo">GREATS</a></li>
+            <li><a class="hidetext" href="register.html">Booking</a></li>
+            <li><a class="hidetext" href="history.html">Score</a></li>
+            <li><a class="hidetext" href="Q&A.html">Q&A</a></li>
+            <li><a class="hidetext" onclick="logout()" href="login.html">Log out</a></li>
+            <li class="menu-button" onclick=showSidebar()><a href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                        height="40px" viewBox="0 -960 960 960" width="40px" fill="#5f6368">
+                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                    </svg></a></li>
+        </ul>
+    </nav>
+    <div class="Banner">
+        <div class="BoxSearch">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Search For Topics....">
+        </div>
+    </div>
+    <div class="BoxForumMain">
+        <div class="leftForum">
+            <div class="Forum">
+                <table id="myTable" class="section-room">
+                    <thead>
+                        <tr>
+                            <th>Forum</th>
+                            <th>Like</th>
+                            <th>Reply</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>test 1</td>
+                            <td><i class="fa-regular fa-heart"></i> 1</td>
+                            <td><i class="fa-regular fa-comment-dots"></i> 4</td>
+                        </tr>
+                        <tr>
+                            <td>test 2</td>
+                            <td><i class="fa-regular fa-heart"></i> 3</td>
+                            <td><i class="fa-regular fa-comment-dots"></i> 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="RightForum">
+            <div class="Category">
+                <div class="BoxCategory">
+                    <h1>Forums Filter</h1>
+                    <button class="active" data-name="all"><i class="fa-solid fa-eye"></i> View All</button>
+                    <button data-name="Popular"><i class="fa-solid fa-heart"></i> Most Popular</button>
+                    <button data-name="Reply"><i class="fa-solid fa-comment-dots"></i> Most Reply</button>
+                </div>
+            </div>
+            <div class="AskQuestion">
+                <button id="OpenQuestion"><i class="fa-solid fa-circle-question"></i> Ask Question</button>
+            </div>
+        </div>
+    </div>
+    <div id="QuestionBox" class="container hideQuestionBox">
+        <div class="signup-box">
+            <h2>Question</h2>
+            <p>เขียนสิ่งที่ต้องการรู้เกี่ยว TU-Greats ลงในช่องด้านล่าง</p>
+            <div class="input-container">
+                <input type="text" placeholder="Enter your question" required>
+                <button class="icon">&#9993;</button>
+            </div>
+        </div>
+        <button class="CloseQuestion">Close</button>
+    </div>
+
+    <script>
+        const OpenQuestion = document.querySelector('#OpenQuestion')
+        const QuestionBox = document.querySelector('#QuestionBox')
+        const CloseQuestion = document.querySelector('.CloseQuestion')
+
+        OpenQuestion.addEventListener('click', () => {
+            QuestionBox.classList.toggle('hideQuestionBox')
+        })
+
+        document.addEventListener('click', e => {
+            if (!OpenQuestion.contains(e.target) && e.target == CloseQuestion) {
+                QuestionBox.classList.add('hideQuestionBox')
+            }
+        })
+    </script>
+    <script>
+        const search = document.querySelector('.BoxSearch input')
+
+        search.addEventListener('input', searchTable);
+
+        function searchTable() {
+            table_rows = document.querySelectorAll('tbody tr');
+            table_rows.forEach((row, i) => {
+                let table_data = row.textContent.toLowerCase(),
+                    search_data = search.value.toLowerCase();
+
+                row.classList.toggle('hide', table_data.indexOf(search_data) < 0);
+                row.style.setProperty('--delay', i / 25 + 's');
+            })
+        }
+    </script>
+    <script>
+        const filterButtons = document.querySelectorAll('.BoxCategory button');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const filterType = button.dataset.name;
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                filterTable(filterType);
+            });
+        });
+
+        function filterTable(type) {
+            const tbody = document.querySelector('tbody');
+            const visibleRows = Array.from(document.querySelectorAll('tbody tr:not(.hide)'));
+            let sortedRows;
+
+            if (type === 'popular') {
+                sortedRows = visibleRows.sort((a, b) => {
+                    const aLikes = parseInt(a.cells[1].textContent);
+                    const bLikes = parseInt(b.cells[1].textContent);
+                    return bLikes - aLikes;
+                });
+            } else if (type === 'reply') {
+                sortedRows = visibleRows.sort((a, b) => {
+                    const aReplies = parseInt(a.cells[2].textContent);
+                    const bReplies = parseInt(b.cells[2].textContent);
+                    return bReplies - aReplies;
+                });
+            } else {
+                sortedRows = visibleRows;
+            }
+
+            tbody.innerHTML = '';
+            sortedRows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+    <script src="/app/popup.js"></script>
+</body>
+
+</html>
