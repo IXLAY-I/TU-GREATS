@@ -1,41 +1,10 @@
 
- 
-// function changePassword() {
-//   const name = document.getElementById('name').value;
-//   const password = document.getElementById('password').value;
-//   const new_password = document.getElementById('new_password').value;
-//   const confirm_new_password = document.getElementById('confirm_new_password').value;
 
-//   const data = {
-//     username: name,
-//     password: password,
-//     new_password: new_password,
-//     confirm_new_password: confirm_new_password,
-//   };
-
-//   let loginSuccess = false;
-
-//   axios.post('http://127.0.0.1:3000/users/change', data)
-//       .then(response => {
-//           if (response.data.message === 'Change password') {
-//               alert("Change password successfully")
-//               window.location.href = 'login.html';
-//           } else {
-//               location.reload();
-//           }
-//       })
-//       .catch(error => {
-//           alert("Wrong, Try again")
-//           location.reload();
-//       });
-// }
-
-function login() {
-  const id = document.getElementById('ID').value;
-  const password = document.getElementById('password').value;
-
-  // window.location.href = 'main.html'
-  // alert("Login successfully")
+function login(event) {
+  const boxLogin = event.target.closest('.BoxLogin');
+  
+  const id = boxLogin.querySelector('#ID').value;
+  const password = boxLogin.querySelector('#password').value;
 
   const data = {
     ID: id,
@@ -193,12 +162,103 @@ function history() {
           // Append the row to the tbody
           tbody.appendChild(row);
         });
-      } else {
         console.error("Failed to fetch history:", response.data.message);
       }
     })
     .catch(error => {
       console.error("Error fetching history:", error);
+    });
+}
+
+function showforum() {
+  axios.post('http://127.0.0.1:3000/users/show_forums')
+
+  .then(response => {
+    console.log(response.data)
+      if (response.data.message === 'Successful') {
+        console.log("as")
+        // Define the table body where the row will be added
+        const tbody = document.querySelector('tbody');
+        const forum = response.data.data || []
+        forum.forEach(dat => {
+          const tr = document.createElement('tr');
+          tr.id = dat.ForumID;
+
+          // Create the first cell and set its content
+          const td1 = document.createElement('td');
+          td1.textContent = dat.text;
+
+          // Create the second cell with the heart icon and like count
+          const td2 = document.createElement('td');
+          const heartIcon = document.createElement('i');
+          heartIcon.className = 'fa-regular fa-heart';
+          heartIcon.setAttribute('onclick', `ForumLike('${dat.ForumID}')`);
+          td2.appendChild(heartIcon);
+          td2.innerHTML += ' '+dat.likes; // Add the like count
+
+          // Create the third cell with the comment icon and comment count
+          const td3 = document.createElement('td');
+          const commentIcon = document.createElement('i');
+          commentIcon.className = 'fa-regular fa-comment-dots';
+          
+          // Add event listener to navigate to forum-comment.html
+          td3.addEventListener('click', () => {
+            console.log('Navigating to forum-comment.html');
+            window.location.assign('forum-comment.html'); // Use window.location.assign for redirection
+          });
+          td3.appendChild(commentIcon);
+          td3.innerHTML += ' '+dat.answer; // Add the comment count
+
+          // Append all cells to the row
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+
+          // Append the row to the table body
+          tbody.appendChild(tr);
+        });
+
+      } else {
+        alert("Wrong, Try again")
+      }
+  })
+  .catch(error => {
+      alert("Wrong, Try again")
+  });
+}
+
+function addforum() {
+  const data = {
+    ID: localStorage.getItem('id'),
+    Text: document.getElementById('forumtext').value,
+  }
+
+  axios.post('http://127.0.0.1:3000/users/forums', data)
+  .then(response => {
+      if (response.data.message === 'Successful') {
+        location.reload();
+      } else {
+        alert("Wrong, Try again")
+      }
+  })
+  .catch(error => {
+      alert("Wrong, Try again")
+  });
+}
+
+function ForumLike(ID) {
+  const data = {
+    ForumID: ID
+  }
+  axios.post('http://127.0.0.1:3000/users/ForumLike', data)
+    .then(response => {
+        if (response.data.message === 'Successful') {
+        } else {
+          alert("Wrong, Try again")
+        }
+    })
+    .catch(error => {
+        alert("Wrong, Try again")
     });
 }
 
