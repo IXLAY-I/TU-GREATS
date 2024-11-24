@@ -13,10 +13,10 @@ body {
     background-position: center;
 }
 
-nav {
+/* nav {
     background-color: rgb(249, 207, 0);
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-}
+} */
 
 nav ul {
     width: 100%;
@@ -26,6 +26,7 @@ nav ul {
     align-items: center;
     padding: 0;
     gap: 10px;
+    font-weight: 500;
 }
 
 nav li {
@@ -46,8 +47,14 @@ nav ul:first-child a:hover {
     background-color: #f0f0f076;
 }
 
+/* nav ul:nth-child(2) li:first-child a {
+    display: flex;
+    gap: 5px;
+} */
+
 nav a:hover {
-    background-color: rgb(255, 218, 34);
+    /* background-color: rgb(255, 218, 34); */
+    color: white;
 }
 
 nav li:first-child {
@@ -195,19 +202,19 @@ nav li:first-child {
 
 .container {
     position: fixed;
-    top: 20vw;
-    left: 30vw;
+    top: 40%;
+    left: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 2vw;
+    gap: 30px;
 }
 
 .signup-box {
     background: #fff;
     border-radius: 10px;
-    padding: 1vw;
+    padding: 15px;
     width: 40vw;
     text-align: center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
@@ -227,13 +234,13 @@ nav li:first-child {
 }
 
 .signup-box h2 {
-    font-size: 1.5vw;
+    font-size: 1.5rem;
     margin-bottom: 1vw;
     color: #333;
 }
 
 .signup-box p {
-    font-size: 1vw;
+    font-size: 1rem;
     margin-bottom: 1vw;
     color: #999;
 }
@@ -248,7 +255,7 @@ nav li:first-child {
     border: none;
     border-radius: 5px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-size: 1vw;
+    font-size: 1rem;
     color: #666;
     outline: none;
 }
@@ -269,6 +276,7 @@ nav li:first-child {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.151);
 }
 
 .CloseQuestion:hover {
