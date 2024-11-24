@@ -1,8 +1,8 @@
 
-
+ 
 function login(event) {
   const boxLogin = event.target.closest('.BoxLogin');
-  
+
   const id = boxLogin.querySelector('#ID').value;
   const password = boxLogin.querySelector('#password').value;
 
@@ -10,11 +10,12 @@ function login(event) {
     ID: id,
     password: password,
   };
+
   axios.post('http://127.0.0.1:3000/users/login', data)
     .then(response => {
         if (response.data.message === 'Successful') {
-            localStorage.setItem("id", document.getElementById('ID').value)
-            localStorage.setItem("name", response.data.data);
+            localStorage.setItem("id", data.ID);
+            localStorage.setItem("name", response.data.Login[0].name);
             alert("Login successfully")
             window.location.href = 'main.html';
         } else {
@@ -162,6 +163,7 @@ function history() {
           // Append the row to the tbody
           tbody.appendChild(row);
         });
+      } else {
         console.error("Failed to fetch history:", response.data.message);
       }
     })
@@ -203,7 +205,7 @@ function showforum() {
           
           // Add event listener to navigate to forum-comment.html
           td3.addEventListener('click', () => {
-            console.log('Navigating to forum-comment.html');
+            localStorage.setItem('ForumID', dat.ForumID); // Store the forum ID for use in forum-comment.html
             window.location.assign('forum-comment.html'); // Use window.location.assign for redirection
           });
           td3.appendChild(commentIcon);
@@ -253,12 +255,78 @@ function ForumLike(ID) {
   axios.post('http://127.0.0.1:3000/users/ForumLike', data)
     .then(response => {
         if (response.data.message === 'Successful') {
+          location.reload();
         } else {
           alert("Wrong, Try again")
         }
     })
     .catch(error => {
         alert("Wrong, Try again")
+    });
+}
+
+function comment() {
+  
+  const data = {
+    ForumID: localStorage.getItem('ForumID'),
+    ID: localStorage.getItem('id'),
+    Text: document.getElementById('commenttext').value,
+  }
+
+  axios.post('http://127.0.0.1:3000/users/comment', data)
+  .then(response => {
+      if (response.data.message === 'Successful') {
+        location.reload();
+      } else {
+        alert("Wrong, Try again")
+      }
+  })
+  .catch(error => {
+      alert("Wrong, Try again")
+    });
+}
+
+function showcomment() {
+
+  axios.post('http://127.0.0.1:3000/users/show_answer')
+  .then(response => {
+      if (response.data.message === 'Successful') {
+        console.log(response.data)
+        const paragraph = document.querySelector(".section .inner-content p");
+
+        // Edit the paragraph's content
+        paragraph.textContent = response.data.data[0].text;
+
+        const commentDiv = document.createElement("div");
+        commentDiv.classList.add("comment");
+
+        // Create the h2 element for the name
+        const h2 = document.createElement("h2");
+        h2.textContent = "นิรนาม";
+
+        // Create the inner content div
+        const innerDiv = document.createElement("div");
+        innerDiv.classList.add("inner-content");
+
+        // Create the paragraph for the message
+        const p = document.createElement("p");
+        p.textContent = response.data.data[0].answer;
+
+        // Append elements to the inner content div
+        innerDiv.appendChild(p);
+
+        // Append elements to the main comment div
+        commentDiv.appendChild(h2);
+        commentDiv.appendChild(innerDiv);
+
+        // Append the new comment to the all-comment div
+        document.querySelector(".all-comment").appendChild(commentDiv);
+      } else {
+        alert("Wrong, Try again")
+      }
+  })
+  .catch(error => {
+      alert("Wrong, Try again")
     });
 }
 
@@ -289,12 +357,35 @@ function showscore() {
       teamleader.forEach((C, i) => {
 
         document.getElementById("L").innerHTML = document.getElementById("L").innerHTML.replace("0", C.L)
-        if (C.L == 3) {
-          document.getElementById("L").setAttribute('data-score', '3')
-        }
         document.getElementById("M").innerHTML = document.getElementById("M").innerHTML.replace("0", C.M)
-        if (C.M == 3) {
-          document.getElementById("M").setAttribute('data-score', '3')
+        if (C.Exempt == "true") {
+          document.getElementById("tteam").innerHTML = "Team Leader"
+          const style = document.createElement('style');
+
+          style.innerHTML = `
+              #MB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #LB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              .Score .line:nth-child(6) div {
+                  background: rgb(57, 207, 57);
+                  color: rgb(255, 255, 255);
+              }    
+              .Subject div:nth-child(6) {
+              border: 3px solid rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }    
+              .Exempt div:nth-child(6) {
+              border: 3px solid  rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }
+                  
+          `;
+
+          document.head.appendChild(style);
+          
         }
 
       })
@@ -302,107 +393,215 @@ function showscore() {
       tu100.forEach((C, i) => {
 
         document.getElementById("D").innerHTML = document.getElementById("D").innerHTML.replace("0", C.D)
-        if (C.D == 3) {
-          document.getElementById("D").setAttribute('data-score', '3')
-        }
         document.getElementById("V").innerHTML = document.getElementById("V").innerHTML.replace("0", C.V)
-        if (C.Z == 3) {
-          document.getElementById("V").setAttribute('data-score', '3')
-        }
         document.getElementById("G").innerHTML = document.getElementById("G").innerHTML.replace("0", C.G)
-        if (C.G == 3) {
-          document.getElementById("G").setAttribute('data-score', '3')
-        }
+        console.log(C)
         if (C.Exempt == "true") {
-          document.getElementById("TU100").classList.add('all-green')        }
+          document.getElementById("t100").innerHTML = "Tu100"
+          const style = document.createElement('style');
+
+          style.innerHTML = `
+              #DB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #VB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #GB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }    
+              .Score .line:nth-child(7) div {
+                  background: rgb(57, 207, 57);
+                  color: rgb(255, 255, 255);
+              }    
+              .Subject div:nth-child(7) {
+              border: 3px solid rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }    
+              .Exempt div:nth-child(7) {
+              border: 3px solid  rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }
+                  
+          `;
+
+          document.head.appendChild(style);
+          
+        }
 
       })
       
       tu101.forEach((C, i) => {
 
         document.getElementById("H").innerHTML = document.getElementById("H").innerHTML.replace("0", C.H)
-        if (C.H == 3) {
-          document.getElementById("H").setAttribute('data-score', '3')
-        }
         document.getElementById("Z").innerHTML = document.getElementById("Z").innerHTML.replace("0", C.Z)
-        if (C.Z == 3) {
-          document.getElementById("Z").setAttribute('data-score', '3')
-        }
         document.getElementById("Y").innerHTML = document.getElementById("Y").innerHTML.replace("0", C.Y)
-        if (C.Y == 3) {
-          document.getElementById("Y").setAttribute('data-score', '3')
-        }
         document.getElementById("C").innerHTML = document.getElementById("C").innerHTML.replace("0", C.C)
-        if (C.C == 3) {
-          document.getElementById("C").setAttribute('data-score', '3')
-        }
         document.getElementById("T").innerHTML = document.getElementById("T").innerHTML.replace("0", C.T)
-        if (C.T == 3) {
-          document.getElementById("T").setAttribute('data-score', '3')
-        }
+
         if (C.Exempt == "true") {
-          document.getElementById("TU101").classList.add('all-green')        }
+          document.getElementById("t101").innerHTML = "TU101"
+          const style = document.createElement('style');
+
+          style.innerHTML = `
+              #HB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #ZB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #YB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #CB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #TB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }    
+              .Score .line:nth-child(2) div {
+                  background: rgb(57, 207, 57);
+                  color: rgb(255, 255, 255);
+              }    
+              .Subject div:nth-child(2) {
+              border: 3px solid rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }    
+              .Exempt div:nth-child(2) {
+              border: 3px solid  rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }
+                  
+          `;
+
+          document.head.appendChild(style);
+          
+        }
       })
 
       tu102.forEach((C, i) => {
 
         document.getElementById("U").innerHTML = document.getElementById("U").innerHTML.replace("0", C.U)
-        if (C.U == 3) {
-          document.getElementById("U").setAttribute('data-score', '3')
-        }
         document.getElementById("A").innerHTML = document.getElementById("A").innerHTML.replace("0", C.A)
-        if (C.A == 3) {
-          document.getElementById("A").setAttribute('data-score', '3')
-        }
         document.getElementById("P").innerHTML = document.getElementById("P").innerHTML.replace("0", C.P)
-        if (C.P == 3) {
-          document.getElementById("P").setAttribute('data-score', '3')
-        }
+
         if (C.Exempt == "true") {
-          document.getElementById("TU102").classList.add('all-green')        }
+          document.getElementById("t102").innerHTML = "TU102"
+          const style = document.createElement('style');
+
+          style.innerHTML = `
+              #UB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #AB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #PB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }  
+              .Score .line:nth-child(5) div {
+                  background: rgb(57, 207, 57);
+                  color: rgb(255, 255, 255);
+              }    
+              .Subject div:nth-child(5) {
+              border: 3px solid rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }    
+              .Exempt div:nth-child(5) {
+              border: 3px solid  rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }
+                  
+          `;
+
+          document.head.appendChild(style);
+          
+        }
       })
 
       tu103.forEach((C, i) => {
         document.getElementById("I").innerHTML = document.getElementById("I").innerHTML.replace("0", C.I)
-        if (C.I == 3) {
-          document.getElementById("I").setAttribute('data-score', '3')
-        }
         document.getElementById("S").innerHTML = document.getElementById("S").innerHTML.replace("0", C.S)
-        if (C.S == 3) {
-          document.getElementById("S").setAttribute('data-score', '3')
-        }
         document.getElementById("O").innerHTML = document.getElementById("O").innerHTML.replace("0", C.O)
-        if (C.O == 3) {
-          document.getElementById("O").setAttribute('data-score', '3')
-        }
+
         if (C.Exempt == "true") {
-          document.getElementById("TU103").classList.add('all-green')
+          document.getElementById("t103").innerHTML = "TU103"
+          const style = document.createElement('style');
+
+          style.innerHTML = `
+              #IB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #SB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #OB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }  
+              .Score .line:nth-child(3) div {
+                  background: rgb(57, 207, 57);
+                  color: rgb(255, 255, 255);
+              }    
+              .Subject div:nth-child(3) {
+              border: 3px solid rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }    
+              .Exempt div:nth-child(3) {
+              border: 3px solid  rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }
+                  
+          `;
+
+          document.head.appendChild(style);
+          
         }
       })
 
       tu106.forEach((C, i) => {
         document.getElementById("R").innerHTML = document.getElementById("R").innerHTML.replace("0", C.R)
-        if (C.R == 3) {
-          document.getElementById("R").setAttribute('data-score', '3')
-        }
         document.getElementById("B").innerHTML = document.getElementById("B").innerHTML.replace("0", C.B)
-        if (C.B == 3) {
-          document.getElementById("B").setAttribute('data-score', '3')
-        }
         document.getElementById("W").innerHTML = document.getElementById("W").innerHTML.replace("0", C.W)
-        if (C.W == 3) {
-          document.getElementById("W").setAttribute('data-score', '3')
-        }
         document.getElementById("E").innerHTML = document.getElementById("E").innerHTML.replace("0", C.E)
-        if (C.E == 3) {
-          document.getElementById("E").setAttribute('data-score', '3')
-        }
         document.getElementById("F").innerHTML = document.getElementById("F").innerHTML.replace("0", C.F)
-        if (C.F == 3) {
-          document.getElementById("F").setAttribute('data-score', '3')
-        }
+
         if (C.Exempt == "true") {
-          document.getElementById("TU106").classList.add('all-green')
+          document.getElementById("t106").innerHTML = "TU106"
+          const style = document.createElement('style');
+
+          style.innerHTML = `
+              #RB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #BB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #WB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #EB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              #FB.BoxTU div:first-child {
+                  background: rgb(44, 155, 0);
+              }
+              .Score .line:nth-child(4) div {
+                  background: rgb(57, 207, 57);
+                  color: rgb(255, 255, 255);
+              }    
+              .Subject div:nth-child(4) {
+              border: 3px solid rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }    
+              .Exempt div:nth-child(4) {
+              border: 3px solid  rgb(33, 157, 35);
+              color: rgb(39, 175, 96);
+              }
+                  
+          `;
+
+          document.head.appendChild(style);
+          
         }
       })
 
