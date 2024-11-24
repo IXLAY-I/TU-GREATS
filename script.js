@@ -273,7 +273,7 @@ function comment() {
     Text: document.getElementById('commenttext').value,
   }
 
-  axios.post('http://127.0.0.1:3000/users/comment', data)
+  axios.post('http://127.0.0.1:3000/users/forum_answer', data)
   .then(response => {
       if (response.data.message === 'Successful') {
         location.reload();
@@ -296,31 +296,34 @@ function showcomment() {
 
         // Edit the paragraph's content
         paragraph.textContent = response.data.data[0].text;
+        response.data.data.forEach(i => {
+          console.log(i);
+          const commentDiv = document.createElement("div");
+          commentDiv.classList.add("comment");
 
-        const commentDiv = document.createElement("div");
-        commentDiv.classList.add("comment");
+          // Create the h2 element for the name
+          const h2 = document.createElement("h2");
+          h2.textContent = "นิรนาม";
 
-        // Create the h2 element for the name
-        const h2 = document.createElement("h2");
-        h2.textContent = "นิรนาม";
+          // Create the inner content div
+          const innerDiv = document.createElement("div");
+          innerDiv.classList.add("inner-content");
 
-        // Create the inner content div
-        const innerDiv = document.createElement("div");
-        innerDiv.classList.add("inner-content");
+          // Create the paragraph for the message
+          const p = document.createElement("p");
+          p.textContent = i.answer;
 
-        // Create the paragraph for the message
-        const p = document.createElement("p");
-        p.textContent = response.data.data[0].answer;
+          // Append elements to the inner content div
+          innerDiv.appendChild(p);
 
-        // Append elements to the inner content div
-        innerDiv.appendChild(p);
+          // Append elements to the main comment div
+          commentDiv.appendChild(h2);
+          commentDiv.appendChild(innerDiv);
 
-        // Append elements to the main comment div
-        commentDiv.appendChild(h2);
-        commentDiv.appendChild(innerDiv);
+          // Append the new comment to the all-comment div
+          document.querySelector(".all-comment").appendChild(commentDiv);
+        });
 
-        // Append the new comment to the all-comment div
-        document.querySelector(".all-comment").appendChild(commentDiv);
       } else {
         alert("Wrong, Try again")
       }
