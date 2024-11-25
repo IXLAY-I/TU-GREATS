@@ -230,11 +230,11 @@ function showforum() {
   .then(response => {
     console.log(response.data)
       if (response.data.message === 'Successful') {
-        console.log("as")
         // Define the table body where the row will be added
         const tbody = document.querySelector('tbody');
         const forum = response.data.data || []
         forum.forEach(dat => {
+          console.log(dat)
           const tr = document.createElement('tr');
           tr.id = dat.ForumID;
 
@@ -257,6 +257,7 @@ function showforum() {
           
           // Add event listener to navigate to forum-comment.html
           td3.addEventListener('click', () => {
+            localStorage.setItem('ForumQuestion', dat.text);
             localStorage.setItem('ForumID', dat.ForumID); // Store the forum ID for use in forum-comment.html
             window.location.assign('forum-comment.html'); // Use window.location.assign for redirection
           });
@@ -339,42 +340,47 @@ function comment() {
 }
 
 function showcomment() {
-
-  axios.post('http://127.0.0.1:3000/users/show_answer')
+  const data = {
+    ForumID: localStorage.getItem('ForumID')
+  }
+  console.log(data);
+  axios.post('http://127.0.0.1:3000/users/show_answer', data)
   .then(response => {
       if (response.data.message === 'Successful') {
-        console.log(response.data)
+        
         const paragraph = document.querySelector(".section .inner-content p");
-
+        console.log(response.data)
         // Edit the paragraph's content
-        paragraph.textContent = response.data.data[0].text;
-        response.data.data.forEach(i => {
-          console.log(i);
-          const commentDiv = document.createElement("div");
-          commentDiv.classList.add("comment");
-
-          // Create the h2 element for the name
-          const h2 = document.createElement("h2");
-          h2.textContent = "นิรนาม";
-
-          // Create the inner content div
-          const innerDiv = document.createElement("div");
-          innerDiv.classList.add("inner-content");
-
-          // Create the paragraph for the message
-          const p = document.createElement("p");
-          p.textContent = i.answer;
-
-          // Append elements to the inner content div
-          innerDiv.appendChild(p);
-
-          // Append elements to the main comment div
-          commentDiv.appendChild(h2);
-          commentDiv.appendChild(innerDiv);
-
-          // Append the new comment to the all-comment div
-          document.querySelector(".all-comment").appendChild(commentDiv);
-        });
+        paragraph.textContent = localStorage.getItem('ForumQuestion');
+        if (response.data.data.index !== 0) {
+          response.data.data.forEach(i => {
+            console.log(i);
+            const commentDiv = document.createElement("div");
+            commentDiv.classList.add("comment");
+  
+            // Create the h2 element for the name
+            const h2 = document.createElement("h2");
+            h2.textContent = "นิรนาม";
+  
+            // Create the inner content div
+            const innerDiv = document.createElement("div");
+            innerDiv.classList.add("inner-content");
+  
+            // Create the paragraph for the message
+            const p = document.createElement("p");
+            p.textContent = i.answer;
+  
+            // Append elements to the inner content div
+            innerDiv.appendChild(p);
+  
+            // Append elements to the main comment div
+            commentDiv.appendChild(h2);
+            commentDiv.appendChild(innerDiv);
+  
+            // Append the new comment to the all-comment div
+            document.querySelector(".all-comment").appendChild(commentDiv);
+          }); 
+        }
 
       } else {
         alert("Wrong, Try again")
