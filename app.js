@@ -28,8 +28,8 @@ app.post('/users/login', async (req, res) => {
     try {
         const [login] = await con.query(`select * from users where ID = '${ID}' and password = '${password}'`)
         res.status(201).json({
-            message: "Successful"
-
+            message: "Successful",
+            Login:login
         })
     } catch (error) {
         res.status(401).json({
@@ -84,7 +84,8 @@ app.post('/users/forums', async (req, res) => {
             if (!existingIDs.includes(String(ForumID))) {
                 const [AddForums] = await con.query(`insert into forums (ForumID, ID, text, answer, likes) VALUE ('${ForumID}', '${ID}', '${Text}', ${0}, ${0})`)
                 res.status(201).json({
-                    message: "Successful"
+                    message: "Successful",
+                    ForumID: ForumID
                 })
                 break;
             }
@@ -113,7 +114,42 @@ app.post('/users/ForumLike', async (req, res) => {
 })
 
 app.post('/users/show_forums', (req, res) => {
-    conection.query(`select text, answer, likes from forums`, function (error, results, fields) {
+    conection.query(`select * from forums`, function (error, results, fields) {
+        try {
+            res.status(201).json({
+                message: "Successful",
+                data: results
+            })
+        }
+        catch (error) {
+            res.status(401).json({
+                message: "Error"
+            }, 401)
+        }
+    });
+})
+
+app.post('/users/forum_answer', async (req, res) => {
+    let ForumID = req.body.ForumID
+    let ID = req.body.ID
+    let Text = req.body.Text
+    try {
+        const [addData] = await con.query(`insert into answers (ForumID, IDAnswer, answer) VALUE ('${ForumID}', '${ID}', '${Text}')`)
+        const [countcomment] = await con.query(`select answer from forums where ForumID = '${ForumID}'`)
+        let addcountanswer = countcomment[0].answer + 1
+        await con.query(`update forums set answer = ${addcountanswer} where ForumID = '${ForumID}'`)
+        res.status(201).json({
+            message: "Successful"
+        })
+    } catch (error) {
+        res.status(401).json({
+            message: "Error"
+        })
+    }
+})
+
+app.post('/users/show_answer', (req, res) => {
+    conection.query(`select answers.IDAnswer, answers.answer, forums.text from answers join forums on answers.ForumID = forums.ForumID`, function (error, results, fields) {
         try {
             res.status(201).json({
                 message: "Successful",
