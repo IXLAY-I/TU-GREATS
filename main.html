@@ -90,7 +90,7 @@
                 <div class="center">
                     <label>ศูนย์สอบ :</label>
                     <div class="select-container">
-                        <select class="select-box">
+                        <select id="examcenter" class="select-box">
                             <option value="none">-</option>
                             <option value="rangsit">รังสิต</option>
                             <option value="thaprachan">ท่าพระจันทร์</option>
@@ -124,7 +124,7 @@
                     <div>
                         <p>*สามารถสมัครสอบได้เพียงครั้งเดียว หากมีการสมัครสอบซ้ำจะทำการยกเลิกสิทธิ์การสมัครสอบในรอบนี้ไป*</p>
                     </div>
-                    <button class="submit-button"onclick="register()">ยืนยันการสมัครสอบ</button>
+                    <button class="submit-button"onclick="registermain()">ยืนยันการสมัครสอบ</button>
                 </div>
             </div>
         </div>
@@ -213,5 +213,6 @@
     <script src="/app/popup.js"></script>
     <script src="/app/register.js"></script>
     <script src="/app/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>

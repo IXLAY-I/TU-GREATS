@@ -81,6 +81,58 @@ function login(event) {
   }
 }
 
+{
+  let selectedDate = '';
+  let selectedTime = '';
+
+  document.querySelectorAll('.date-item').forEach(button => {
+    button.addEventListener('click', function() {
+      selectedDate = this.getAttribute('data-date');
+      // alert('Selected date: ' + selectedDate);
+    });
+  });
+
+  document.querySelectorAll('.Time-item').forEach(button => {
+    button.addEventListener('click', function() {
+      selectedTime = this.getAttribute('data-time');
+      // alert('Selected time: ' + selectedTime);
+    });
+  });
+  
+  function registermain() {
+    const ID = localStorage.getItem('id');
+    const examcenter = document.getElementById('examcenter').value;
+
+    if (!selectedDate || !selectedTime) {
+      alert('Please select both a date and time.');
+      return;
+    }
+    
+    const data = {
+      ID: ID,
+      Examcenter: examcenter,
+      Date: selectedDate,
+      Time: selectedTime,
+      Coupon: false
+    };
+    console.log(data);
+    axios.post('http://127.0.0.1:3000/users/register', data)
+      .then(response => {
+          if (response.data.message === 'Successful') {
+              // window.location.href = 'main.html';
+              
+          } else {
+              // location.reload();
+          }
+      })
+      .catch(error => {
+          alert("Wrong, Try again")
+      });
+  }
+}
+
+
+
 function history() {
   const data = {
     ID: localStorage.getItem('id')
