@@ -14,22 +14,59 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Dumping database structure for tugreats
+CREATE DATABASE IF NOT EXISTS `tugreats` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `tugreats`;
+
+-- Dumping structure for table tugreats.answers
+CREATE TABLE IF NOT EXISTS `answers` (
+  `ForumID` text DEFAULT NULL,
+  `IDAnswer` text DEFAULT NULL,
+  `answer` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Dumping data for table tugreats.answers: ~2 rows (approximately)
 DELETE FROM `answers`;
 INSERT INTO `answers` (`ForumID`, `IDAnswer`, `answer`) VALUES
 	('263073', '6610742071', 'sdfsdf'),
 	('263073', '6610742303', 'หี');
 
+-- Dumping structure for table tugreats.examresult
+CREATE TABLE IF NOT EXISTS `examresult` (
+  `Result_number` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` text DEFAULT NULL,
+  `round` text DEFAULT NULL,
+  `Expiration_date` date DEFAULT NULL,
+  PRIMARY KEY (`Result_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Dumping data for table tugreats.examresult: ~1 rows (approximately)
 DELETE FROM `examresult`;
 INSERT INTO `examresult` (`Result_number`, `ID`, `round`, `Expiration_date`) VALUES
 	(1, '6610742303', '3/2566_RS_PT1 (กรกฎาคม 2566)', '2024-11-22');
+
+-- Dumping structure for table tugreats.forums
+CREATE TABLE IF NOT EXISTS `forums` (
+  `ForumID` text DEFAULT NULL,
+  `ID` text DEFAULT NULL,
+  `text` text DEFAULT NULL,
+  `answer` int(11) DEFAULT NULL,
+  `likes` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table tugreats.forums: ~2 rows (approximately)
 DELETE FROM `forums`;
 INSERT INTO `forums` (`ForumID`, `ID`, `text`, `answer`, `likes`) VALUES
 	('263073', '6610742303', 'พรุ่งนี้อากงจะมาหาผมควรเตรียมถุงยางรอไว้มั้ยครับ', 2, 11),
 	('90658', '6610742303', 'CN204 ที่เธอล้อ วันนี้มันจะล่อคุณแล้ว', 0, 11);
+
+-- Dumping structure for table tugreats.question
+CREATE TABLE IF NOT EXISTS `question` (
+  `Question` text DEFAULT NULL,
+  `Answer` text DEFAULT NULL,
+  `ShowQuestion` enum('true','false') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table tugreats.question: ~10 rows (approximately)
 DELETE FROM `question`;
@@ -45,40 +82,117 @@ INSERT INTO `question` (`Question`, `Answer`, `ShowQuestion`) VALUES
 	('เวลาที่คนใกล้เสร็จมันจะมีเสียงอะไรออกมาหรอครับ', '', 'false'),
 	('ถ้าแคมมันดำควรเริ่มจากเอากระดาษทรายมาขัดก่อนใช่มั้ยครับ', 'หากมีรอยทำที่ไม่เยอะมากควรขัดแบบเบาๆ เพื่อบัดสิ่งสกปรกออกแจกแคมของคุณ แต่หากเยอะคล้ายๆคอของพวกไอ้อ้วนความขัดแรงๆเพื่อนำออกโดยเร็วไม่งั้นจะติดถาวร', 'true');
 
+-- Dumping structure for table tugreats.register
+CREATE TABLE IF NOT EXISTS `register` (
+  `Register_number` int(11) NOT NULL AUTO_INCREMENT,
+  `ID` text DEFAULT NULL,
+  `Examcenter` text DEFAULT NULL,
+  `Date` text DEFAULT NULL,
+  `Time` text DEFAULT NULL,
+  `Coupon` enum('true','false') DEFAULT NULL,
+  `Createat` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`Register_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Dumping data for table tugreats.register: ~1 rows (approximately)
 DELETE FROM `register`;
 INSERT INTO `register` (`Register_number`, `ID`, `Examcenter`, `Date`, `Time`, `Coupon`, `Createat`) VALUES
 	(1, '6610742303', 'รังสิต', '08/09/2567', '09:00 - 12:00 น.', 'false', '2024-09-08 02:14:14');
+
+-- Dumping structure for table tugreats.teamleader
+CREATE TABLE IF NOT EXISTS `teamleader` (
+  `Result_number` text DEFAULT NULL,
+  `L` text DEFAULT NULL,
+  `M` text DEFAULT NULL,
+  `Exempt` enum('true','false') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table tugreats.teamleader: ~1 rows (approximately)
 DELETE FROM `teamleader`;
 INSERT INTO `teamleader` (`Result_number`, `L`, `M`, `Exempt`) VALUES
 	('1', '3', '3', 'true');
 
+-- Dumping structure for table tugreats.tu100
+CREATE TABLE IF NOT EXISTS `tu100` (
+  `Result_number` text DEFAULT NULL,
+  `D` text DEFAULT NULL,
+  `V` text DEFAULT NULL,
+  `G` text DEFAULT NULL,
+  `Exempt` enum('true','false') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Dumping data for table tugreats.tu100: ~1 rows (approximately)
 DELETE FROM `tu100`;
 INSERT INTO `tu100` (`Result_number`, `D`, `V`, `G`, `Exempt`) VALUES
 	('1', '2', '2', '2', 'false');
+
+-- Dumping structure for table tugreats.tu101
+CREATE TABLE IF NOT EXISTS `tu101` (
+  `Result_number` text DEFAULT NULL,
+  `H` text DEFAULT NULL,
+  `Z` text DEFAULT NULL,
+  `Y` text DEFAULT NULL,
+  `C` text DEFAULT NULL,
+  `T` text DEFAULT NULL,
+  `Exempt` enum('true','false') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table tugreats.tu101: ~1 rows (approximately)
 DELETE FROM `tu101`;
 INSERT INTO `tu101` (`Result_number`, `H`, `Z`, `Y`, `C`, `T`, `Exempt`) VALUES
 	('1', '3', '1', '1', '1', '1', 'false');
 
+-- Dumping structure for table tugreats.tu102
+CREATE TABLE IF NOT EXISTS `tu102` (
+  `Result_number` text DEFAULT NULL,
+  `U` text DEFAULT NULL,
+  `A` text DEFAULT NULL,
+  `P` text DEFAULT NULL,
+  `Exempt` enum('true','false') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Dumping data for table tugreats.tu102: ~1 rows (approximately)
 DELETE FROM `tu102`;
 INSERT INTO `tu102` (`Result_number`, `U`, `A`, `P`, `Exempt`) VALUES
 	('1', '2', '2', '2', 'false');
+
+-- Dumping structure for table tugreats.tu103
+CREATE TABLE IF NOT EXISTS `tu103` (
+  `Result_number` text DEFAULT NULL,
+  `I` text DEFAULT NULL,
+  `S` text DEFAULT NULL,
+  `O` text DEFAULT NULL,
+  `Exempt` enum('true','false') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table tugreats.tu103: ~1 rows (approximately)
 DELETE FROM `tu103`;
 INSERT INTO `tu103` (`Result_number`, `I`, `S`, `O`, `Exempt`) VALUES
 	('1', '3', '3', '3', 'true');
 
+-- Dumping structure for table tugreats.tu106
+CREATE TABLE IF NOT EXISTS `tu106` (
+  `Result_number` text DEFAULT NULL,
+  `R` text DEFAULT NULL,
+  `B` text DEFAULT NULL,
+  `W` text DEFAULT NULL,
+  `E` text DEFAULT NULL,
+  `F` text DEFAULT NULL,
+  `Exempt` enum('true','flase') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 -- Dumping data for table tugreats.tu106: ~1 rows (approximately)
 DELETE FROM `tu106`;
 INSERT INTO `tu106` (`Result_number`, `R`, `B`, `W`, `E`, `F`, `Exempt`) VALUES
 	('1', '3', '3', '3', '3', '3', 'true');
+
+-- Dumping structure for table tugreats.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` text DEFAULT NULL,
+  `name` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `Coupon` enum('true','false') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table tugreats.users: ~2 rows (approximately)
 DELETE FROM `users`;
